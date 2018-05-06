@@ -1,10 +1,10 @@
 
 #Ignore the password of database
-src/main/resources/db.properties
+MovieSystem/src/main/resources/db.properties
 
 #Ignore config of idea
-.idea/*
+MovieSystem/.idea/*
 *.iml
 
 #Ignore target
-target/*
+MovieSystem/target/*
