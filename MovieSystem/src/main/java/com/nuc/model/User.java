@@ -9,24 +9,30 @@ package com.nuc.model;
 public class User {
     private  int id;
 
-    //用户昵称
-    private String name;
-//    密码
+    private String username;
+
+    private String nickname;
+    /** 地理位置，电影院才需要填写 */
+    private String location;
+
+    private String telephone;
+
     private String password;
-//    用户头像保存位置
-    private String imgpath;
-//    注册时绑定的邮箱,如果用手机注册,则该字段为空.如用邮箱注册,则绑定邮箱和显示邮箱一致,但绑定邮箱不能更改,显示邮箱可以在个人设置中更改
-    private String bindingemail;
-//    名片对外展示的邮箱
-    private String showemail;
-//    同绑定邮箱规则
-    private String bindingtelephone;
-//    名片对外展示的电话
-    private String showtelephone;
-//    行业
-    private String industry;
-//    兴趣
-    private String interest;
+
+    /** 0普通用户，1影院，2系统管理员 维护拍片 */
+    private int type;
+
+    public User() {
+    }
+
+    public User(String username, String nickname, String location, String telephone, String password, int type) {
+        this.username = username;
+        this.nickname = nickname;
+        this.location = location;
+        this.telephone = telephone;
+        this.password = password;
+        this.type = type;
+    }
 
     public int getId() {
         return id;
@@ -36,14 +42,36 @@ public class User {
         this.id = id;
     }
 
-
-
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
     }
 
     public String getPassword() {
@@ -54,75 +82,11 @@ public class User {
         this.password = password;
     }
 
-    public String getImgpath() {
-        return imgpath;
+    public int getType() {
+        return type;
     }
 
-    public void setImgpath(String imgpath) {
-        this.imgpath = imgpath;
-    }
-
-    public String getBindingemail() {
-        return bindingemail;
-    }
-
-    public void setBindingemail(String bindingemail) {
-        this.bindingemail = bindingemail;
-    }
-
-    public String getShowemail() {
-        return showemail;
-    }
-
-    public void setShowemail(String showemail) {
-        this.showemail = showemail;
-    }
-
-    public String getBindingtelephone() {
-        return bindingtelephone;
-    }
-
-    public void setBindingtelephone(String bindingtelephone) {
-        this.bindingtelephone = bindingtelephone;
-    }
-
-    public String getShowtelephone() {
-        return showtelephone;
-    }
-
-    public void setShowtelephone(String showtelephone) {
-        this.showtelephone = showtelephone;
-    }
-
-    public String getIndustry() {
-        return industry;
-    }
-
-    public void setIndustry(String industry) {
-        this.industry = industry;
-    }
-
-    public String getInterest() {
-        return interest;
-    }
-
-    public void setInterest(String interest) {
-        this.interest = interest;
-    }
-
-    public User() {
-        /*do nothing*/
-    }
-
-    /**
-     * @param phoneNum 可能为null
-     */
-    public User(String email, String phoneNum, String password, String name) {
-        this.bindingemail = email;
-        this.showemail = email;
-        this.bindingtelephone = phoneNum;
-        this.showtelephone = phoneNum;
-        this.password = password;
-        this.name = name;
+    public void setType(int type) {
+        this.type = type;
     }
 }
