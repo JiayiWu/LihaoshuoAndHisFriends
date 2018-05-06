@@ -39,18 +39,17 @@ public class UserController {
 
     @RequestMapping("/modify/password")
     @ResponseBody
-    public MsgInfo modifyPassword(int id,String password){
+    public MsgInfo modifyPassword(HttpSession session,String password){
         return null;
     }
 
     /**
      * @param session
-     * @param id(如果ID为空，则默认返回当前用户信息)
      * @return User
      */
     @RequestMapping("/info")
     @ResponseBody
-    public MsgInfo getUserInfo(HttpSession session, int id){
+    public MsgInfo getUserInfo(HttpSession session){
         return null;
     }
 

@@ -81,13 +81,12 @@ public class CinemaController {
     }
 
     /**
-     * 返回当前影院有哪些电影厅
-     * @param cinemaId
+     * 返回当前影院有哪些电影厅(后台)
      * @return Room
      */
     @RequestMapping("/room/list")
     @ResponseBody
-    public MsgInfo listRoom(int cinemaId){
+    public MsgInfo listRoom(HttpSession session){
         return null;
     }
 
@@ -99,6 +98,27 @@ public class CinemaController {
     @RequestMapping("/list")
     @ResponseBody
     public MsgInfo listCinema(int movieId){
+        return null;
+    }
+
+    /**
+     * 查找当前电影院下面指定电影的排片信息
+     * @param movieId
+     * @return ArrangingVo
+     */
+    @RequestMapping("/arranging/list")
+    @ResponseBody
+    public MsgInfo listArranging(int movieId,int cinemaId){
+        return null;
+    }
+
+    /**
+     * 获取当前电影院下排了哪些片，用户后台管理
+     * @return List<Movie>
+     */
+    @RequestMapping("/movie/list")
+    @ResponseBody
+    public MsgInfo getMovieList(HttpSession session){
         return null;
     }
 

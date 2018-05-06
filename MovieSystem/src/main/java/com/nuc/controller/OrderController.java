@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * Created by Jiayiwu on 18/5/6.
  * Mail:wujiayi@lgdreamer.com
@@ -40,12 +42,11 @@ public class OrderController {
 
     /**
      * 获取某个用户名下的订单
-     * @param userId
      * @return List<OrderVo>
      */
     @RequestMapping("/list")
     @ResponseBody
-    public MsgInfo getUserOrder(int userId){
+    public MsgInfo getUserOrder(HttpSession session){
         return null;
     }
 
