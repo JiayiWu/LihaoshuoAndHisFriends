@@ -1,0 +1,10 @@
+
+#Ignore the password of database
+src/main/resources/db.properties
+
+#Ignore config of idea
+.idea/*
+*.iml
+
+#Ignore target
+target/*
