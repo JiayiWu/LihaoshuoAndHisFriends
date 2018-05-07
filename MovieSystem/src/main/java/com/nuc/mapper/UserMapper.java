@@ -17,11 +17,10 @@ public interface UserMapper {
 
     public int resetPass(int userID, String password);
 
-    public User getUserById (int  id);
 
     public User getUserByUsername(String userName);
 
     public int removeUser(int userID);
 
-    public List<User> getUserByMovieId(int movieId);
+
 }

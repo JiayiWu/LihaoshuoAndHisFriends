@@ -16,11 +16,11 @@ public interface MovieMapper {
 
     public int updateMovie(Movie movie);
 
-    public List<Movie> getArrangingByMovies(int[] movieId);
-
     public Movie getMovieById(int id);
 
     public int deleteMovie(int id);
+
+    public List<Movie> getAllMovie();
 
 
 }

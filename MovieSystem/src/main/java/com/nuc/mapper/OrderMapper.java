@@ -16,9 +16,11 @@ public interface OrderMapper {
 
     public int updateOrder(Order order);
 
-    public int deleteArranging(int id);
+    public int deleteOrder(int id);
 
     public Order getOrderById(int id);
+
+    public List<Order> getOrdersByUserid(int userId);
 
 
 

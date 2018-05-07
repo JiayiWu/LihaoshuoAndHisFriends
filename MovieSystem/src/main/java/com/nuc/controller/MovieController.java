@@ -1,6 +1,8 @@
 package com.nuc.controller;
 
 import com.nuc.config.MsgInfo;
+import com.nuc.service.MovieService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,6 +19,8 @@ import java.sql.Timestamp;
 @RequestMapping("/movie")
 public class MovieController {
 
+    @Autowired
+    MovieService movieService;
 
     /**
      * 创建影片
@@ -30,7 +34,7 @@ public class MovieController {
     @RequestMapping("/create")
     @ResponseBody
     public MsgInfo createMovie(String name,String logoUrl,String description,String type,int timeOfFile){
-        return null;
+        return movieService.createMovie(name,logoUrl,description,type,timeOfFile);
     }
 
     /**
@@ -40,7 +44,7 @@ public class MovieController {
     @RequestMapping("/list")
     @ResponseBody
     public MsgInfo getAllMovie(){
-        return null;
+        return movieService.getAllMovie();
     }
 
     /**
@@ -51,7 +55,7 @@ public class MovieController {
     @RequestMapping("/delete")
     @ResponseBody
     public MsgInfo deleteMovie(int id){
-        return null;
+        return movieService.deleteMovie(id);
     }
 
     /**
@@ -62,7 +66,7 @@ public class MovieController {
     @RequestMapping("/info")
     @ResponseBody
     public MsgInfo getMovieInfo(int id){
-        return null;
+        return movieService.getMovieInfo(id);
     }
 
 

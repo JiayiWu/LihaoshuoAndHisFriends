@@ -13,8 +13,8 @@ public interface MovieService {
 
     public MsgInfo getAllMovie();
 
-    public MsgInfo deleteMovie();
+    public MsgInfo deleteMovie(int id);
 
-    public MsgInfo getMovieInfo();
+    public MsgInfo getMovieInfo(int id);
 
 }

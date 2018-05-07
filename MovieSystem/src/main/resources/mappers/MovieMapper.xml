@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vid.mapper.MovieMapper">
+    <!-- 这里namespace必须是UserMapper接口的路径” -->
+    <insert id="insertMovie"  parameterType="Movie">
+      INSERT INTO movie (name,logoUrl,description,type,timeOfMovie,status) VALUES (#{name},#{logoUrl},#{description},#{type},#{timeOfMovie},#{status})
+    </insert>
+
+    <update id="updateMovie"   parameterType="Movie">
+        update movie
+        <set>
+            <if test="name != null">name=#{name},</if>
+            <if test="logoUrl != null">logoUrl=#{logoUrl},</if>
+            <if test="description != null">description=#{description},</if>
+            <if test="type != null">type=#{type},</if>
+            <if test="timeOfMovie != null">timeOfMovie=#{timeOfMovie},</if>
+            <if test="status != null">status=#{status}</if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <select id="getMovieById"  resultType="Movie">
+        SELECT * FROM movie WHERE id = #{0}
+    </select>
+
+    <delete id="deleteMovie">
+        DELETE  FROM movie WHERE id = #{0}
+    </delete>
+
+    <select id="getAllMovie"  resultType="Movie">
+     select * from movie
+    </select>
+
+
+</mapper>

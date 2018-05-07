@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nuc.mapper.RoomMapper">
+    <!-- 这里namespace必须是UserMapper接口的路径” -->
+    <insert id="insertRoom" parameterType="Room" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user(cinemaId,name,sits,status)
+        VALUES (#{cinemaId},#{name},#{sits},#{status})
+    </insert>
+
+    <update id="updateRoom" parameterType="Room">
+        UPDATE user SET
+        <set>
+            <if test="cinemaId != null">cinemaId=#{cinemaId},</if>
+            <if test="name != null">name=#{name},</if>
+            <if test="sits != null">sits=#{sits},</if>
+            <if test="status != null">status=#{status}</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <select id="getRoomById" resultType="Room">
+       select * from room  where id = #{0}
+    </select>
+
+
+    <select id="getRoomByCinemaId"  resultType="Room">
+        SELECT * FROM room where cinemaId = #{0}
+    </select>
+    
+
+
+    <delete id="deleteRoom">
+        DELETE FROM room WHERE id = #{0}
+    </delete>
+</mapper>

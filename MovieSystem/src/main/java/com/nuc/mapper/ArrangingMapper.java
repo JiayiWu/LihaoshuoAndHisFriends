@@ -1,6 +1,7 @@
 package com.nuc.mapper;
 
 import com.nuc.model.Arranging;
+import com.nuc.model.Movie;
 import com.nuc.model.User;
 
 import java.util.List;
@@ -24,6 +25,6 @@ public interface ArrangingMapper {
 
     public List<User> getListCinemaByMovieId(int movie);
 
-    public int[] getAllMovieIdByCinemaId(int cinemaId);
+    public List<Movie> getAllMovieIdByCinemaId(int cinemaId);
 
 }

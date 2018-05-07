@@ -13,12 +13,14 @@ import com.nuc.utils.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Timestamp;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by Jiayiwu on 18/5/6.
  * Mail:wujiayi@lgdreamer.com
  * Change everywhere
  */
+@Service
 public class CinemaServiceImpl implements CinemaService {
 
     @Autowired
@@ -112,11 +114,20 @@ public class CinemaServiceImpl implements CinemaService {
 
     @Override
     public MsgInfo listArranging(int movieId, int cinemaId) {
-        return null;
+
+        try {
+            return new MsgInfo(true,"获取成功",arrangingMapper.getArrangingByMovieIdAndCinemaId(movieId,cinemaId));
+        }catch (Exception e){
+            return new MsgInfo(false,"获取失败");
+        }
     }
 
     @Override
     public MsgInfo getMovieList(int cinemaId) {
-        return null;
+        try {
+            return new MsgInfo(true,"获取成功",arrangingMapper.getAllMovieIdByCinemaId(cinemaId));
+        }catch (Exception e){
+            return new MsgInfo(false,"获取失败");
+        }
     }
 }

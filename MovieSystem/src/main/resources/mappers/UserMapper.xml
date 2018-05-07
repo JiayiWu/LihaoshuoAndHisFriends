@@ -5,23 +5,21 @@
 <mapper namespace="com.nuc.mapper.UserMapper">
     <!-- 这里namespace必须是UserMapper接口的路径” -->
     <insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO user(name,password,imgpath,bindingemail,showemail,bindingtelephone,showtelephone,industry,interest)
-        VALUES (#{name},#{password},#{imgpath},#{bindingemail},#{showemail},#{bindingtelephone},#{showtelephone},#{industry},
-        #{interest})
-        <!-- 这里sql结尾不能加分号，否则报“ORA-00911”的错误 -->
+        INSERT INTO user(username,nickname,location,telephone,password,type)
+        VALUES (#{username},#{nickname},#{location},#{telephone},#{password},#{type})
     </insert>
 
     <update id="updateUser" parameterType="User">
         UPDATE user SET
-        name = #{name},
-        password = #{password},
-        imgpath = #{imgpath},
-        bindingemail = #{bindingemail},
-        showemail = #{showemail},
-        bindingtelephone = #{bindingtelephone},
-        showtelephone = #{showtelephone},
-        industry = #{industry},
-        interest = #{interest}
+        <set>
+            <if test="username != null">username=#{username},</if>
+            <if test="nickname != null">nickname=#{nickname},</if>
+            <if test="location != null">location=#{location},</if>
+            <if test="telephone != null">telephone=#{telephone},</if>
+            <if test="password != null">password=#{password},</if>
+            <if test="type != null">type=#{type}, </if>
+            <if test="status != null">status=#{status}</if>
+        </set>
         WHERE id = #{id}
     </update>
 
@@ -30,30 +28,10 @@
     </update>
 
 
-    <select id="getUserByEmail"  resultType="User">
-        SELECT * FROM user where bindingemail = #{0}
+    <select id="getUserByUsername"  resultType="User">
+        SELECT * FROM user where username = #{0}
     </select>
 
-    <select id="getUserByTelephone"  resultType="User">
-        SELECT * FROM user where bindingtelephone = #{0}
-    </select>
-
-    <select id="getUserById"  resultType="User">
-        SELECT * FROM user where id = #{0}
-    </select>
-
-    <update id="setPortraitURL">
-        UPDATE user SET imgpath = #{1} WHERE id = #{0}
-    </update>
-
-
-    <select id="isActive"  resultType="java.lang.Integer">
-        SELECT state FROM user where id = #{0}
-    </select>
-
-    <update id="activateAccount">
-        UPDATE user SET  state = 1 WHERE id = #{0}
-    </update>
 
 
     <delete id="removeUser">

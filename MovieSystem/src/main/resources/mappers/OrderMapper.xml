@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vid.mapper.OrderMapper">
+    <!-- 这里namespace必须是UserMapper接口的路径” -->
+    <insert id="insertOrder"  parameterType="Order">
+      INSERT INTO order (ticketNum,gmt_create,modify_create,userId,cinemaId,movieId,roomId,status,sitPair) VALUES (#{ticketNum},#{gmt_create},#{modify_create},#{userId},#{cinemaId},#{movieId},#{roomId},#{roomId},#{status},#{sitPair})
+    </insert>
+
+    <update id="updateOrder"   parameterType="Order">
+        update order
+        <set>
+            <if test="ticketNum != null">ticketNum=#{ticketNum},</if>
+            <if test="gmt_create != null">gmt_create=#{gmt_create},</if>
+            <if test="modify_create != null">modify_create=#{modify_create},</if>
+            <if test="userId != null">userId=#{userId},</if>
+            <if test="cinemaId != null">cinemaId=#{cinemaId},</if>
+            <if test="movieId != null">movieId=#{movieId},</if>
+            <if test="roomId != null">roomId=#{roomId},</if>
+            <if test="status != null">status=#{status},</if>
+            <if test="sitPair != null">sitPair=#{sitPair}</if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <select id="getOrderById"  resultType="Order">
+        SELECT * FROM order WHERE id = #{0}
+    </select>
+
+    <delete id="deleteOrder">
+        DELETE  FROM order WHERE id = #{0}
+    </delete>
+
+    <select id="getOrdersByUserid"  resultType="Order">
+     select * from order WHERE userId = #{0} order by gmt_create DESC
+    </select>
+
+</mapper>

@@ -1,6 +1,7 @@
 package com.nuc.model;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * Created by Jiayiwu on 18/5/6.
@@ -8,6 +9,7 @@ import java.sql.Timestamp;
  * Change everywhere
  */
 public class Order {
+
     private int id;
     //取票码
     private String ticketNum;
@@ -25,6 +27,24 @@ public class Order {
     int roomId;
     //0未付款，1已付款
     int status;
+
+    String sitPair;
+
+
+    public Order(String ticketNum, int userId,
+        int cinemaId, int movieId, int roomId, String sitPair) {
+        this.ticketNum = ticketNum;
+        this.gmt_create = new Timestamp(new Date().getTime());
+        ;
+        this.modify_create = new Timestamp(new Date().getTime());
+        ;
+        this.userId = userId;
+        this.cinemaId = cinemaId;
+        this.movieId = movieId;
+        this.roomId = roomId;
+        this.sitPair = sitPair;
+        this.status = 0;
+    }
 
     public int getId() {
         return id;
@@ -96,5 +116,13 @@ public class Order {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public String getSitPair() {
+        return sitPair;
+    }
+
+    public void setSitPair(String sitPair) {
+        this.sitPair = sitPair;
     }
 }

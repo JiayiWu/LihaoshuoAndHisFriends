@@ -1,6 +1,11 @@
 package com.nuc.controller;
 
 import com.nuc.config.MsgInfo;
+import com.nuc.model.SitPair;
+import com.nuc.model.User;
+import com.nuc.service.OrderService;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,17 +21,21 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/order")
 public class OrderController {
 
+    @Autowired
+    OrderService orderService;
     /**
      * 用户在没付款前调用这个接口下单
      * @param roomId
-     * @param row
-     * @param column
+     * @param movieId
      * @return 返回订单信息 Order
      */
     @RequestMapping("/ticket")
     @ResponseBody
-    public MsgInfo orderTicket(int roomId, int row, int column){
-        return null;
+    public MsgInfo orderTicket(HttpSession session,int roomId, int movieId,List<SitPair> sits){
+        User user =(User) session.getAttribute("user");
+        if (null == user)
+            return new MsgInfo(false,"用户未登录");
+        return orderService.orderTicket(user.getId(),roomId,movieId,sits);
     }
 
     /**
@@ -37,7 +46,7 @@ public class OrderController {
     @RequestMapping("/pay")
     @ResponseBody
     public MsgInfo payTicket(int orderId){
-        return null;
+        return orderService.payTicket(orderId);
     }
 
     /**
@@ -47,7 +56,10 @@ public class OrderController {
     @RequestMapping("/list")
     @ResponseBody
     public MsgInfo getUserOrder(HttpSession session){
-        return null;
+        User user =(User) session.getAttribute("user");
+        if (null == user)
+            return new MsgInfo(false,"用户未登录");
+        return orderService.getUserOrder(user.getId());
     }
 
     /**
@@ -56,7 +68,7 @@ public class OrderController {
      * @return Boolean true表示成功 false表示失败
      */
     public MsgInfo deleteOrder(int orderId){
-        return null;
+        return orderService.deleteOrder(orderId);
     }
 
 }

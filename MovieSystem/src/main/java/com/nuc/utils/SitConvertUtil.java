@@ -2,6 +2,9 @@ package com.nuc.utils;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.nuc.model.SitPair;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Jiayiwu on 18/5/6.
@@ -11,8 +14,7 @@ import com.alibaba.fastjson.JSONObject;
 public class SitConvertUtil {
 
     public static int[][] paraseJson(String json){
-        String tem = JSONObject.toJSON(json).toString();
-        JSONArray h =JSONObject.parseArray(tem);
+        JSONArray h =JSONObject.parseArray(json);
         int [][] result = new int[h.size()][];
         for (int i = 0;i < h.size(); i++){
             JSONArray o1 = (JSONArray) h.get(i);
@@ -25,8 +27,22 @@ public class SitConvertUtil {
 
     }
 
+    public static List<SitPair> parasePair(String json){
+        JSONArray h =JSONObject.parseArray(json);
+        List<SitPair> results = new ArrayList<>();
+        for (Object j : h){
+            results.add((SitPair)j);
+        }
+        return results;
+    }
+
     public static String toJson(int[][]sits){
        return JSONObject.toJSON(sits).toString();
+    }
+
+
+    public static String toJsonPair(List<SitPair> list){
+        return JSONObject.toJSON(list).toString();
     }
 
 }

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vid.mapper.ArrangingMapper">
+    <!-- 这里namespace必须是UserMapper接口的路径” -->
+    <insert id="insertArranging"  parameterType="Arranging">
+      INSERT INTO arranging (cinemaId,movieId,roomId,startTime,endTime,price,status) VALUES (#{cinemaId},#{movieId},#{roomId},#{startTime},#{endTime},#{price},#{status})
+    </insert>
+
+    <update id="updateArranging"   parameterType="Arranging">
+        update arranging
+        <set>
+            <if test="cinamaId != null">cinamaId=#{cinamaId},</if>
+            <if test="roomId != null">roomId=#{roomId},</if>
+            <if test="movieId != null">movieId=#{movieId},</if>
+            <if test="startTime != null">bio=#{startTime},</if>
+            <if test="endTime != null">endTime=#{endTime},</if>
+            <if test="price != null">price=#{price},</if>
+            <if test="status != null">status=#{status}</if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <select id="getArrangingByMovieIdAndCinemaId"  resultType="Arranging">
+        SELECT * FROM arranging WHERE movieId = #{0} AND friendid = #{1}
+    </select>
+
+    <delete id="deleteArranging">
+        DELETE  FROM arranging WHERE id = #{0}
+    </delete>
+
+    <select id="getArrangingById"  resultType="Arranging">
+     select * from arranging WHERE id = #{0}
+    </select>
+
+    <select id="getListCinemaByMovieId" resultType="User">
+       select * from  (SELECT a.cinemaId as cinemaid from arranging where movieId = #{0}) b,user where user.id = cinemaid;
+    </select>
+
+
+    <select id="getAllMovieIdByCinemaId" resultType="Movie">
+       select * from  (SELECT a.movieId as movieid from arranging where cinemaId = #{0}) b,movie where movie.id = movieid;
+    </select>
+
+</mapper>

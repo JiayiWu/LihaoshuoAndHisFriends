@@ -22,6 +22,16 @@ public class Movie {
     //0上映，1下架
     int status;
 
+
+    public Movie(String name, String logoUrl, String description, String type, int timeOfMovie) {
+        this.name = name;
+        this.logoUrl = logoUrl;
+        this.description = description;
+        this.type = type;
+        this.timeOfMovie = timeOfMovie;
+        this.status = 0;
+    }
+
     public int getId() {
         return id;
     }

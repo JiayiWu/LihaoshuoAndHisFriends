@@ -1,6 +1,8 @@
 package com.nuc.service;
 
 import com.nuc.config.MsgInfo;
+import com.nuc.model.SitPair;
+import java.util.List;
 
 /**
  * Created by Jiayiwu on 18/5/6.
@@ -9,7 +11,7 @@ import com.nuc.config.MsgInfo;
  */
 public interface OrderService {
 
-    public MsgInfo orderTicket(int roomId, int row, int column);
+    public MsgInfo orderTicket(int userId,int roomId, int movieId,List<SitPair> sits);
 
     public MsgInfo payTicket(int orderId);
 
