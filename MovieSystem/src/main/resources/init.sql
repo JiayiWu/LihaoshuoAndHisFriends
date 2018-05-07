@@ -37,7 +37,7 @@ CREATE TABLE `movie` (
   `logoUrl` TEXT  NOT NULL,
   `description` TEXT  NOT NULL,
   `type` VARCHAR(255)  NOT NULL,
-  `timeOfFile` INT NOT NULL ,
+  `timeOfMovie` INT NOT NULL ,
   `status` INT DEFAULT 0,
   PRIMARY KEY (`id`)
 )

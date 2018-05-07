@@ -22,6 +22,8 @@ public interface ArrangingMapper {
 
     public Arranging getArrangingById(int id);
 
+    public List<User> getListCinemaByMovieId(int movie);
+
     public int[] getAllMovieIdByCinemaId(int cinemaId);
 
 }

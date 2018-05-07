@@ -25,6 +25,19 @@ public class Arranging {
 
     int status;
 
+    public Arranging() {
+    }
+
+    public Arranging(int cinamaId, int roomId, int movieId, Timestamp startTime, Timestamp endTime, double price) {
+        this.cinamaId = cinamaId;
+        this.roomId = roomId;
+        this.movieId = movieId;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.price = price;
+        this.status = 0;
+    }
+
     public int getId() {
         return id;
     }
