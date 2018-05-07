@@ -56,13 +56,13 @@ public class CinemaController {
    */
   @RequestMapping("/room/create")
   @ResponseBody
-  public MsgInfo createRoom(HttpSession session, String name, int[][] sits) {
+  public MsgInfo createRoom(HttpSession session, String name, int[][] sits,int modelNum) {
 
     User user = (User) session.getAttribute("cinema");
     if (null != user){
       return new MsgInfo(false,"用户未登录");
     }
-    return cinemaService.createRoom(user.getId(),name,sits);
+    return cinemaService.createRoom(user.getId(),name,sits,modelNum);
   }
 
   /**
@@ -133,6 +133,17 @@ public class CinemaController {
   @ResponseBody
   public MsgInfo listArranging(int movieId, int cinemaId) {
     return cinemaService.listArranging(movieId,cinemaId);
+  }
+
+  /**
+   * 查找指定厅信息
+   *
+   * @return RoomVo
+   */
+  @RequestMapping("/room/info")
+  @ResponseBody
+  public MsgInfo roomInfo(int roomId) {
+    return cinemaService.getRoom(roomId);
   }
 
   /**

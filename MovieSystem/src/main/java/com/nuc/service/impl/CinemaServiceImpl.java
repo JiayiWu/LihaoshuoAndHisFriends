@@ -10,6 +10,7 @@ import com.nuc.model.Room;
 import com.nuc.service.CinemaService;
 import com.nuc.utils.SitConvertUtil;
 import com.nuc.utils.TimeUtil;
+import com.nuc.vo.RoomVo;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Timestamp;
@@ -58,8 +59,8 @@ public class CinemaServiceImpl implements CinemaService {
     }
 
     @Override
-    public MsgInfo createRoom(int cinemaId, String name, int[][] sits) {
-        Room room = new Room(cinemaId,name, SitConvertUtil.toJson(sits));
+    public MsgInfo createRoom(int cinemaId, String name, int[][] sits,int modelNum) {
+        Room room = new Room(cinemaId,name, SitConvertUtil.toJson(sits),modelNum);
         if (roomMapper.insertRoom(room) > 0){
             return new MsgInfo(true,"影厅设置成功",room);
         }else {
@@ -135,6 +136,15 @@ public class CinemaServiceImpl implements CinemaService {
     public MsgInfo getMovieList(int cinemaId) {
         try {
             return new MsgInfo(true,"获取成功",arrangingMapper.getAllMovieIdByCinemaId(cinemaId));
+        }catch (Exception e){
+            return new MsgInfo(false,"获取失败");
+        }
+    }
+
+    @Override
+    public MsgInfo getRoom(int roomId) {
+        try {
+            return new MsgInfo(true,"获取成功",new RoomVo(roomMapper.getRoomById(roomId)));
         }catch (Exception e){
             return new MsgInfo(false,"获取失败");
         }

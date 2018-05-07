@@ -15,6 +15,7 @@ CREATE TABLE `room` (
   `name` VARCHAR (255)  NOT NULL ,
   `sits` TEXT  NOT NULL ,
   `status` INT DEFAULT 0,
+  `modelNum` INT ,
   PRIMARY KEY (`id`)
 )
 

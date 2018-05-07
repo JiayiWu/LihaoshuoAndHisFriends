@@ -15,7 +15,7 @@ public interface CinemaService {
 
     public MsgInfo deleteArraging(int id);
 
-    public MsgInfo createRoom(int cinemaId,String name,int[][] sits);
+    public MsgInfo createRoom(int cinemaId,String name,int[][] sits,int modelNum);
 
     public MsgInfo modifyRoom(int roomId,int[][]sits);
 
@@ -30,4 +30,6 @@ public interface CinemaService {
     public MsgInfo listArranging(int movieId,int cinemaId);
 
     public MsgInfo getMovieList(int cinemaId);
+
+    public MsgInfo getRoom(int roomId);
 }

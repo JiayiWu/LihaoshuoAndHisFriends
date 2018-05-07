@@ -17,14 +17,18 @@ public class Room {
 
     int status;
 
+    //模板序号
+    int modelNum;
+
     public Room() {
     }
 
-    public Room(int cinemaId, String name, String sits) {
+    public Room(int cinemaId, String name, String sits,int modelNum) {
         this.cinemaId = cinemaId;
         this.name = name;
         this.sits = sits;
         this.status = 0;
+        this.modelNum = modelNum;
     }
 
     public int getId() {
@@ -65,5 +69,13 @@ public class Room {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public int getModelNum() {
+        return modelNum;
+    }
+
+    public void setModelNum(int modelNum) {
+        this.modelNum = modelNum;
     }
 }
