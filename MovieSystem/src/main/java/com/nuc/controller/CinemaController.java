@@ -107,6 +107,17 @@ public class CinemaController {
    *
    * @return User(影厅信息)
    */
+  @RequestMapping("/list/time")
+  @ResponseBody
+  public MsgInfo listCinema(int movieId,Timestamp time) {
+    return cinemaService.listCinema(movieId,time);
+  }
+
+  /**
+   * 查找当前影片下面有哪些院线排片
+   *
+   * @return User(影厅信息)
+   */
   @RequestMapping("/list")
   @ResponseBody
   public MsgInfo listCinema(int movieId) {

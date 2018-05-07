@@ -113,6 +113,15 @@ public class CinemaServiceImpl implements CinemaService {
     }
 
     @Override
+    public MsgInfo listCinema(int movieId, Timestamp timestamp) {
+        try {
+            return new MsgInfo(true,"获取成功",arrangingMapper.getListCinemaByMovieIdAndTime(movieId,timestamp));
+        }catch (Exception e){
+            return new MsgInfo(false,"获取失败");
+        }
+    }
+
+    @Override
     public MsgInfo listArranging(int movieId, int cinemaId) {
 
         try {

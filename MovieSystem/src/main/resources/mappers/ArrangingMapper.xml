@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.vid.mapper.ArrangingMapper">
     <!-- 这里namespace必须是UserMapper接口的路径” -->
-    <insert id="insertArranging"  parameterType="Arranging">
+    <insert id="insertArranging"  parameterType="Arranging" useGeneratedKeys="true" keyProperty="id">
       INSERT INTO arranging (cinemaId,movieId,roomId,startTime,endTime,price,status) VALUES (#{cinemaId},#{movieId},#{roomId},#{startTime},#{endTime},#{price},#{status})
     </insert>
 
@@ -37,6 +37,11 @@
     <select id="getListCinemaByMovieId" resultType="User">
        select * from  (SELECT a.cinemaId as cinemaid from arranging where movieId = #{0}) b,user where user.id = cinemaid;
     </select>
+
+    <select id="getListCinemaByMovieIdAndTime" resultType="User">
+       select * from  (SELECT a.cinemaId as cinemaid from arranging where movieId = #{0} and startTime >= #{1}) b,user where user.id = cinemaid;
+    </select>
+
 
 
     <select id="getAllMovieIdByCinemaId" resultType="Movie">

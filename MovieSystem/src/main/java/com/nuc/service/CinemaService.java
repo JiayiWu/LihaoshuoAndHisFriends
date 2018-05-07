@@ -25,6 +25,8 @@ public interface CinemaService {
 
     public MsgInfo listCinema(int movieId);
 
+    public MsgInfo listCinema(int movieId,Timestamp timestamp);
+
     public MsgInfo listArranging(int movieId,int cinemaId);
 
     public MsgInfo getMovieList(int cinemaId);

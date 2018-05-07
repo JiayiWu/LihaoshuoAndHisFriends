@@ -4,6 +4,7 @@ import com.nuc.model.Arranging;
 import com.nuc.model.Movie;
 import com.nuc.model.User;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -24,6 +25,8 @@ public interface ArrangingMapper {
     public Arranging getArrangingById(int id);
 
     public List<User> getListCinemaByMovieId(int movie);
+
+    public List<User> getListCinemaByMovieIdAndTime(int movie,Timestamp timestamp);
 
     public List<Movie> getAllMovieIdByCinemaId(int cinemaId);
 

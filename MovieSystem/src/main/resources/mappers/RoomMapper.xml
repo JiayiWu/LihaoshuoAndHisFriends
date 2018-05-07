@@ -21,7 +21,7 @@
     </update>
 
     <select id="getRoomById" resultType="Room">
-       select * from room  where id = #{0}
+       select * from room  where id = #{0} for update
     </select>
 
 
