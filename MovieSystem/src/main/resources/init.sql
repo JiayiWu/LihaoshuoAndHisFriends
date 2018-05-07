@@ -47,8 +47,8 @@ CREATE TABLE `arranging` (
    `cinemaId` INT NOT NULL ,
   `movieId` INT NOT NULL ,
   `roomId` INT NOT NULL ,
-  `startTime` timestamp NOT NULL,
-  `endTime` timestamp NOT NULL,
+  `startTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `endTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `price` FLOAT DEFAULT 0,
   `status` INT DEFAULT 0,
   PRIMARY KEY (`id`)
