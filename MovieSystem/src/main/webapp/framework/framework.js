@@ -9,12 +9,13 @@
 
 define(['ui-router/angular-ui-router',
         'framework/topnav/topnavCtrl',
-        'framework/topnav/navListService',
+        'framework/topnav/loginCtrl',
         'business/home/configures/homeRouterConfig',
-        'business/application/configures/appRouterConfig'
+        'business/order/configures/orderRouterConfig',
+        'business/backend/configures/backendRouterConfig'
     ],
-    function (router, topnavCtrl, navListService,
-              homeRouterConfig, appRouterConfig) {
+    function (router, topnavCtrl, loginCtrl,
+              homeRouterConfig, orderRouterConfig, backendRouterConfig) {
         'use strict';
 
         // 注入框架的配置文件（新增业务模块在此处添加注册）
@@ -24,13 +25,14 @@ define(['ui-router/angular-ui-router',
             'ui.bootstrap',
             'ui.router',
             homeRouterConfig.name,
-            appRouterConfig.name
+            orderRouterConfig.name,
+            backendRouterConfig.name
         ];
 
         var framework = angular.module('framework', dependency);
 
         framework.controller('topnavCtrl', topnavCtrl); // 顶部菜单控制器
-        framework.service('navListService', navListService); // 菜单列表数据服务
+        framework.controller('loginCtrl', loginCtrl);
 
         // 初始跳转至首页模块
         framework.config(['$urlRouterProvider', function ($urlRouterProvider) {

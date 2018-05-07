@@ -1,0 +1,64 @@
+<!-- Created by L.H.S on 2018/5/7. -->
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">登录</h3>
+</div>
+
+<div class="modal-body" id="modal-body">
+
+    <div class="form_line">
+        <label>用户名</label>
+        <input type="text" class="form-control" ng-model="data.username">
+    </div>
+
+    <div class="form_line">
+        <label>密码</label>
+        <input type="password" class="form-control" ng-model="data.pwd">
+    </div>
+
+    <div class="form_line" ng-if="modalType=='register'">
+        <label>确认密码</label>
+        <input type="password" class="form-control" ng-model="data.pwd2">
+    </div>
+
+    <div ng-if="data.type===1">
+        <div class="form_line">
+            <label>影院名</label>
+            <input type="text" class="form-control" ng-model="data.nickname">
+        </div>
+
+        <div class="form_line">
+            <label>地址</label>
+            <input type="text" class="form-control" ng-model="data.location">
+        </div>
+
+        <div class="form_line">
+            <label>联系电话</label>
+            <input type="text" class="form-control" ng-model="data.telephone">
+        </div>
+    </div>
+
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="ok()">登录</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+</div>
+
+<style>
+    .form_line {
+        width: 310px;
+        margin: 15px auto;
+    }
+
+    .form_line label {
+        display: inline-block;
+        vertical-align: middle;
+        width: 60px;
+    }
+
+    .form_line input {
+        width: 240px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+</style>

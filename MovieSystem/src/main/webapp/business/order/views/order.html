@@ -1,0 +1,56 @@
+<!-- Created by L.H.S on 2017/8/14. -->
+
+<div class="main_content">
+
+    <div ng-if="!auth()" class="not_login">请先登录</div>
+
+    <div ng-if="auth()">
+
+        <div class="blockquote">待进行订单</div>
+        <div class="not_login" ng-if="futureOrder.length==0">暂无数据</div>
+
+        <div ng-show="futureOrder.length>0">
+            <table class="table table-striped">
+                <thead>
+                <th>电影名</th>
+                <th>影院</th>
+                <th>影院地址</th>
+                <th>取票码</th>
+                <th>观影厅</th>
+                </thead>
+                <tbody>
+                <tr ng-repeat="row in futureOrder">
+                    <td>{{row.movieName}}</td>
+                    <td>{{row.cinemaName}}</td>
+                    <td>{{row.cinemaLocation}}</td>
+                    <td>{{row.ticketNum}}</td>
+                    <td>{{row.roomName}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="blockquote">历史订单</div>
+        <div class="not_login" ng-if="historyOrder.length==0">暂无数据</div>
+
+        <div ng-show="historyOrder.length>0">
+            <table class="table table-striped">
+                <thead>
+                <th>电影名</th>
+                <th>影院</th>
+                <th>影院地址</th>
+                <th>日期</th>
+                </thead>
+                <tbody>
+                <tr ng-repeat="row in futureOrder">
+                    <td>{{row.movieName}}</td>
+                    <td>{{row.cinemaName}}</td>
+                    <td>{{row.cinemaLocation}}</td>
+                    <td>{{row.gmt_create}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

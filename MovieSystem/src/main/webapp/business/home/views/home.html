@@ -1,19 +1,138 @@
 <!-- Created by L.H.S on 2017/8/14. -->
 
-<div ng-repeat="item in [0,1,2,3,4,5,6,7,8,9,20]" class="each_movie">
-    <img ng-src="item.logoUrl" alt="暂无图片资源">
-    <span>{{movieList[0].name}}</span>
+<!-- 选择电影 -->
+<div ng-if="currentPage=='movie'" class="main_content">
+    <div ng-repeat="item in movieList" class="each_movie" ng-click="getDetail(item)">
+        <img ng-src="item.logoUrl" alt="暂无图片资源">
+        <span>{{item.name}}</span>
+    </div>
 </div>
 
+<!-- 选择影院 -->
+<div ng-if="currentPage=='cinema'||currentPage=='session'||currentPage=='seats'">
+    <div class="cinema_bg_div">
+        <div class="movie_thumbnail">
+            <img ng-src="selectedMovie.logoUrl" alt="暂无图片资源">
+        </div>
+
+        <div class="movie_info">
+            <span class="title">{{selectedMovie.name}}</span>
+            <span>{{selectedMovie.type}} / {{selectedMovie.timeOfFile}}</span>
+            <span>{{selectedMovie.description}}</span>
+        </div>
+    </div>
+
+    <!-- 日期和影院 -->
+    <div class="main_content" style="margin-top: 40px;">
+
+        <div ng-if="currentPage=='cinema'">
+            <div class="date_picker">
+                <span style="color: #999;">日期：</span>
+                <div class="date_picker_each" ng-repeat="item in dateList" ng-click="dateClick(item)"
+                     ng-class="{active: item.ts==selectedDate.ts}">
+                    {{item.label}}
+                </div>
+            </div>
+
+            <div class="blockquote" style="margin-bottom: 0;">影院列表</div>
+
+            <div ng-repeat="item in cinemaList" class="each_cinema" ng-click="getSessions(item)">
+                <div class="name">{{item.nickname}}</div>
+                <div class="location">{{item.location}}</div>
+            </div>
+        </div>
+
+        <!-- 选择场次 -->
+        <div ng-if="currentPage=='session'">
+            <div class="blockquote" style="margin-bottom: 0;">
+                {{selectedCinema.nickname}}
+                <span style="margin-left: 20px;font-size: 14px;">观影日期：{{selectedDate.label}}</span>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <table class="table table-striped">
+                    <thead>
+                    <th>放映时间</th>
+                    <th>结束时间</th>
+                    <th>放映厅</th>
+                    <th>票价</th>
+                    <th>选座购票</th>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in arrangeList">
+                        <td>{{item.startTime}}</td>
+                        <td>{{item.endTime}}</td>
+                        <td>{{item.roomId}}</td>
+                        <td style="color: #f34d41">￥{{item.price}}</td>
+                        <td>
+                            <div class="date_picker_each active" style="margin: 0 0;" ng-click="buyTickets(item)">
+                                选座购票
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 选择座位 -->
+        <div ng-if="currentPage=='seats'">
+            <div class="blockquote" style="margin-bottom: 0;">
+                {{selectedCinema.nickname}}
+                <span style="margin-left: 20px;font-size: 14px;">观影时间：{{selectedCinema.label}} {{selectedSession.startTime + ' - ' + selectedSession.endTime}}</span>
+                <span style="margin-left: 20px;font-size: 14px;">影厅：{{selectedSession.roomId}}</span>
+                <span style="margin-left: 20px;font-size: 14px;">票价：￥{{selectedSession.price}}/张</span>
+                <button class="red confirm_seat" ng-click="pay()">确认选座</button>
+            </div>
+
+            <div class="main_content" style="width: 1100px; padding: 20px 20px; border: 1px solid #d8d8d8; margin-top: 20px;">
+                <div>
+                    <div class="title_tip">
+                        <img src="/theme/img/empty.png"> 可选座位
+                    </div>
+                    <div class="title_tip">
+                        <img src="/theme/img/occupied.png"> 已售座位
+                    </div>
+                    <div class="title_tip">
+                        <img src="/theme/img/selected.png"> 已选座位
+                    </div>
+                </div>
+
+                <!-- 银幕中央 -->
+                <div class="screen_div">
+                    <img src="/theme/img/screen.png">
+                    银幕中央
+                </div>
+
+                <!-- 座位 -->
+                <div style="width: 600px; display: flex; justify-content: center; align-items: center">
+                    <div style="margin: 20px auto;">
+                        <div ng-repeat="row in seatsArr">
+                            <div ng-repeat="item in row track by $index" class="each_seat"
+                                 ng-class="{'occupied':item==1, 'road':item==2, 'selected':item===4}"
+                                 ng-click="seatClick(item, row, $index)"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <style>
     .each_movie {
         width: 160px;
         height: 260px;
+        font-size: 16px;
         display: inline-block;
         vertical-align: top;
         position: relative;
         margin: 15px 15px;
+        cursor: pointer;
+    }
+
+    .each_movie:hover img {
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     }
 
     .each_movie img {
@@ -25,7 +144,6 @@
     }
 
     .each_movie span {
-        font-size: 16px;
         display: inline-block;
         width: 100%;
         text-align: center;
@@ -33,5 +151,154 @@
         position: absolute;
         bottom: 0;
         left: 0;
+    }
+
+    .cinema_bg_div {
+        width: 100%;
+        height: 300px;
+        background-image: url("/theme/img/cinema_bg.png");
+        position: relative;
+    }
+
+    .movie_thumbnail {
+        width: 200px;
+        height: 270px;
+        border: 2px solid #fff;
+        position: absolute;
+        bottom: -20px;
+        left: 60px;
+        background-color: #fff;
+    }
+
+    .movie_info {
+        height: 270px;
+        width: 500px;
+        display: inline-block;
+        vertical-align: top;
+        color: #fff;
+        position: absolute;
+        left: 280px;
+        bottom: -20px;
+    }
+
+    .movie_thumbnail img {
+        width: 196px;
+        height: 266px;
+        display: block;
+        color: #d8d8d8;
+        border: 1px solid #d8d8d8;
+    }
+
+    .movie_info span {
+        margin: 10px 10px;
+        display: block;
+    }
+
+    .movie_info span.title {
+        font-size: 26px;
+        margin-bottom: 25px;
+    }
+
+    .date_picker {
+        width: 100%;
+        height: 45px;
+        line-height: 45px;
+        border: 1px solid #d8d8d8;
+        padding-left: 10px;
+    }
+
+    .date_picker_each {
+        margin: 0 20px;
+        display: inline-block;
+        vertical-align: middle;
+        cursor: pointer;
+    }
+
+    .date_picker_each:hover {
+        color: #f34d41;
+    }
+
+    .date_picker_each.active {
+        background-color: #f34d41;
+        color: #fff;
+        border-radius: 14px;
+        padding: 0 9px;
+        height: 25px;
+        line-height: 25px;
+    }
+
+    .each_cinema {
+        padding: 15px 10px;
+        border-bottom: 1px dashed #d8d8d8;
+        cursor: pointer;
+    }
+
+    .each_cinema div.name {
+        font-size: 16px;
+    }
+
+    .each_cinema div.location {
+        color: #afafaf;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+
+    .each_cinema:hover div.name {
+        color: #f34d41;
+    }
+
+    .title_tip {
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 26px;
+        font-size: 16px;
+        color: #666;
+        margin: 20px 20px;
+    }
+
+    .title_tip img {
+        height: 26px;
+        margin-right: 10px;
+    }
+
+    .screen_div {
+        width: 600px;
+        text-align: center;
+        font-size: 16px;
+        color: #666;
+    }
+
+    .screen_div img {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .each_seat {
+        width: 30px;
+        height: 26px;
+        display: inline-block;
+        vertical-align: middle;
+        margin: 5px 5px;
+        background: url("/theme/img/empty.png") no-repeat;
+        cursor: pointer;
+    }
+
+    .each_seat.occupied {
+        background: url("/theme/img/occupied.png") no-repeat;
+    }
+
+    .each_seat.selected {
+        background: url("/theme/img/selected.png") no-repeat;
+    }
+
+    .each_seat.road {
+        background: none;
+    }
+
+    .confirm_seat {
+        float: right;
+        position: relative;
+        top: -12px;
+        border-radius: 50px;
     }
 </style>

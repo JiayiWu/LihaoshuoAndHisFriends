@@ -1,0 +1,69 @@
+<!-- Created by L.H.S on 2017/8/14. -->
+
+<div class="main_content">
+
+    <!--<div ng-if="!auth()" class="not_login">请先登录</div>-->
+
+    <!--<div ng-if="auth()">-->
+
+    <!--<div class="blockquote">{{auth().cinemaName}}</div>-->
+
+    <!--</div>-->
+
+    <div class="left_part">
+        <div class="left_nav" ng-repeat="item in leftNavs"
+             ng-class="{'active': item.id==currentPage}"
+             ng-click="changePage(item)">
+            {{item.label}}
+        </div>
+    </div>
+
+    <div class="right_part">
+        <!-- room -->
+        <div ng-if="currentPage=='room'">
+
+        </div>
+
+        <!-- arrange -->
+        <div ng-if="currentPage=='arrange'">
+
+        </div>
+
+        <!-- movie -->
+        <div ng-if="currentPage=='movie'">
+
+        </div>
+    </div>
+
+</div>
+
+<style>
+    .left_part {
+        width: 180px;
+        display: inline-block;
+        vertical-align: top;
+        padding: 10px 0;
+        background-color: #4f4f4f;
+    }
+
+    .right_part {
+        width: calc(100% - 190px);
+        display: inline-block;
+        vertical-align: top;
+    }
+
+    .left_nav {
+        background-color: #4f4f4f;
+        color: #fff;
+        padding: 10px 0;
+        height: 35px;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .left_nav:hover,
+    .left_nav.active {
+        background-color: #dafafc;
+        color: #4f4f4f !important;
+    }
+</style>

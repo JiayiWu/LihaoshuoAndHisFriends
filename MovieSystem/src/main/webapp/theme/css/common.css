@@ -2,7 +2,45 @@
  * styles in common
  */
 
-#content {
+.main_content {
     width: 1140px;
     margin: 0 auto;
+}
+
+button {
+    outline: none;
+    border: none;
+}
+
+button.red {
+    width: 220px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #fff;
+    font-size: 18px;
+    background-color: #df2d2d;
+}
+
+.blockquote {
+    font-size: 18px;
+    color: #333;
+    border-left: 4px solid #f03d37;
+    padding-left: 6px;
+    line-height: 18px;
+    margin: 20px 0;
+}
+
+.active {
+    color: #ef4238 !important;
+}
+
+a {
+    cursor: pointer !important;
+}
+
+.not_login {
+    font-size: 24px;
+    color: #d8d8d8;
+    margin: 20px 0;
 }

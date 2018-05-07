@@ -11,5 +11,34 @@
         <img src="/theme/img/logo.png" style="height: 40px;margin: 5px 10px;">
     </div>
 
+    <div class="collapse navbar-collapse" uib-collapse="isNavCollapsed">
+        <ul class="nav navbar-nav">
+            <li ng-repeat="na in navList">
+                <a ui-sref="{{na.state}}" ng-class="{active: isActived(na.state)}">{{na.text}}</a>
+            </li>
+        </ul>
 
+        <div style="float: right" ng-if="!auth()">
+            <div class="login_btn" ng-click="loginModal('register')">注册</div>
+            <div style="margin: 0 10px; float: right; line-height: 50px;"> / </div>
+            <div class="login_btn" ng-click="loginModal('login')">登录</div>
+        </div>
+
+        <div style="float: right; line-height: 50px;" ng-if="auth()">
+            {{auth()}}
+        </div>
+
+    </div>
 </nav>
+
+<style>
+    .login_btn {
+        float: right;
+        line-height: 50px;
+        cursor: pointer;
+    }
+
+    .login_btn:hover {
+        color: #f34d41;
+    }
+</style>
