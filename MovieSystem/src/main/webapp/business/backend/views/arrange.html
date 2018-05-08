@@ -27,7 +27,7 @@
                 {{roomOpts.selectedObj.name}} <span class="fa fa-caret-down"></span>
             </button>
             <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="btn-append-to-body">
-                <li ng-repeat="op in roomOpts.options" ng-click="movieOpts.select(op)">
+                <li ng-repeat="op in roomOpts.options" ng-click="roomOpts.select(op)">
                     <a>{{op.name}}</a>
                 </li>
             </ul>
