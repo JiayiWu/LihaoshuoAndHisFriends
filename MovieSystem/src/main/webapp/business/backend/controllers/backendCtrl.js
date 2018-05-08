@@ -75,11 +75,11 @@ define([''], function () {
                 roomModal.result.then(function (data) {
 
                     if (data.modelNum == 1) {
-                        data.seats = template_1;
+                        data.sits = template_1;
                     } else if (data.modelNum == 2) {
-                        data.seats = template_2;
+                        data.sits = template_2;
                     } else {
-                        data.seats = template_3;
+                        data.sits = template_3;
                     }
 
                     $.ajax({
