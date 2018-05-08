@@ -31,13 +31,14 @@ public class CinemaController {
    */
   @RequestMapping("/arrange/create")
   @ResponseBody
-  public MsgInfo arrangeMovie(HttpSession session, @RequestParam int roomId, @RequestParam int movieId, @RequestParam Timestamp startTime,
+  public MsgInfo arrangeMovie(HttpSession session, @RequestParam int roomId, @RequestParam int movieId, @RequestParam String startTime,
       @RequestParam double price) {
+
     User user = (User) session.getAttribute("cinema");
     if (null != user){
       return new MsgInfo(false,"用户未登录");
     }
-    return cinemaService.arrangeMovie(user.getId(), roomId, movieId, startTime, price);
+    return cinemaService.arrangeMovie(user.getId(), roomId, movieId, convert(startTime), price);
   }
 
   /**
@@ -113,8 +114,8 @@ public class CinemaController {
    */
   @RequestMapping("/list/time")
   @ResponseBody
-  public MsgInfo listCinema(@RequestParam int movieId,@RequestParam Timestamp time) {
-    return cinemaService.listCinema(movieId,time);
+  public MsgInfo listCinema(@RequestParam int movieId,@RequestParam String time) {
+    return cinemaService.listCinema(movieId,convert(time));
   }
 
   /**
@@ -179,4 +180,10 @@ public class CinemaController {
     return cinemaService.getMovieList(user.getId());
   }
 
+  private  Timestamp convert(String s) {
+    if (null == s || s.equals("") || s.equals("0")|| s.toLowerCase().equals("null")){
+      return null;
+    }
+    return new Timestamp(Long.parseLong(s));
+  }
 }

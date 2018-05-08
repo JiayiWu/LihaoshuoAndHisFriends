@@ -1,8 +1,9 @@
-package com.nuc.controller;
+package com.nuc.utils;
 
-import java.sql.Timestamp;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
+
+import java.sql.Timestamp;
 
 /**
  * 时间转换器接口
