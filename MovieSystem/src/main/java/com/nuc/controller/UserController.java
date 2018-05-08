@@ -24,7 +24,8 @@ public class UserController {
    */
   @RequestMapping("/create")
   @ResponseBody
-  public MsgInfo createUser(User user) {
+  public MsgInfo createUser(String username,String nickname,String location,String telephone,String password,int type) {
+    User user = new User(username,nickname,location,telephone,password,type);
     return userService.createUser(user);
   }
 
@@ -33,7 +34,9 @@ public class UserController {
    */
   @RequestMapping("/modify/info")
   @ResponseBody
-  public MsgInfo modifyInfo(User user) {
+  public MsgInfo modifyInfo(int id,String username,String nickname,String location,String telephone,String password,int type) {
+    User user = new User(username,nickname,location,telephone,password,type);
+    user.setId(id);
     return userService.modifyInfo(user);
   }
 
