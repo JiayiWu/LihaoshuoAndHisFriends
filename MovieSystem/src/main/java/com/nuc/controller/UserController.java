@@ -25,7 +25,7 @@ public class UserController {
    */
   @RequestMapping("/create")
   @ResponseBody
-  public MsgInfo createUser(@RequestParam String username,@RequestParam String nickname,@RequestParam String location,@RequestParam String telephone,@RequestParam String password,@RequestParam int type) {
+  public MsgInfo createUser( String username, String nickname, String location, String telephone, String password, int type) {
     User user = new User(username,nickname,location,telephone,password,type);
     return userService.createUser(user);
   }
