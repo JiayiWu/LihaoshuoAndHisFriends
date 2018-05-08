@@ -73,7 +73,7 @@ define([], function () {
                 loginModal.result.then(function (data) {
 
                     var jsonData = {
-                        userName: data.username,
+                        username: data.username,
                         password: data.pwd,
                         type: role
                     };
@@ -103,7 +103,7 @@ define([], function () {
                     } else {
                         $.ajax({
                             url: '/user/create',
-                            type: 'GET',
+                            type: 'POST',
                             data: JSON.stringify(jsonData),
                             success: function (resp) {
                                 sessionStorage.setItem('username', data.username);
