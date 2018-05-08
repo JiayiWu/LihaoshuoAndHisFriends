@@ -144,7 +144,7 @@ public class CinemaController {
   @RequestMapping("/arranging/cinema")
   @ResponseBody
   public MsgInfo listArranging(HttpSession session){
-    User user = (User) session.getAttribute("movie");
+    User user = (User) session.getAttribute("cinema");
     if (user == null)
       return new MsgInfo(false,"未登录");
 
@@ -170,7 +170,7 @@ public class CinemaController {
   @RequestMapping("/movie/list")
   @ResponseBody
   public MsgInfo getMovieList(HttpSession session) {
-    User user = (User) session.getAttribute("movie");
+    User user = (User) session.getAttribute("cinema");
     if (user == null)
       return new MsgInfo(false,"未登录");
     return cinemaService.getMovieList(user.getId());
