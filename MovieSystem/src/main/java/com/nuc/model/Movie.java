@@ -22,6 +22,8 @@ public class Movie {
     //0上映，1下架
     int status;
 
+    public Movie() {
+    }
 
     public Movie(String name, String logoUrl, String description, String type, int timeOfMovie) {
         this.name = name;

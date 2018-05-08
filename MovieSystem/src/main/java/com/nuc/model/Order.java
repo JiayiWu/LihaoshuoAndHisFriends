@@ -30,6 +30,8 @@ public class Order {
 
     String sitPair;
 
+    public Order() {
+    }
 
     public Order(String ticketNum, int userId,
         int cinemaId, int movieId, int roomId, String sitPair) {
