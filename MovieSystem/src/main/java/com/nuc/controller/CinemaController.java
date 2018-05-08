@@ -161,7 +161,7 @@ public class CinemaController {
   /**
    * 获取当前电影院下排了场次
    *
-   * @return List<User>
+   * @return List<Arranging>
    */
   @RequestMapping("/movie/list")
   @ResponseBody
