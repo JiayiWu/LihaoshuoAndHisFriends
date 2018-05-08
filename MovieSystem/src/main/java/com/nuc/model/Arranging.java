@@ -28,8 +28,8 @@ public class Arranging {
     public Arranging() {
     }
 
-    public Arranging(int cinamaId, int roomId, int movieId, Timestamp startTime, Timestamp endTime, double price) {
-        this.cinamaId = cinamaId;
+    public Arranging(int cinemaId, int roomId, int movieId, Timestamp startTime, Timestamp endTime, double price) {
+        this.cinemaId = cinemaId;
         this.roomId = roomId;
         this.movieId = movieId;
         this.startTime = startTime;
