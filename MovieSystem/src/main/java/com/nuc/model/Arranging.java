@@ -11,7 +11,7 @@ public class Arranging {
 
     int id;
 
-    int cinamaId;
+    int cinemaId;
 
     int roomId;
 
@@ -46,12 +46,12 @@ public class Arranging {
         this.id = id;
     }
 
-    public int getCinamaId() {
-        return cinamaId;
+    public int getCinemaId() {
+        return cinemaId;
     }
 
-    public void setCinamaId(int cinamaId) {
-        this.cinamaId = cinamaId;
+    public void setCinemaId(int cinemaId) {
+        this.cinemaId = cinemaId;
     }
 
     public int getRoomId() {
@@ -101,4 +101,6 @@ public class Arranging {
     public void setStatus(int status) {
         this.status = status;
     }
+
+
 }
