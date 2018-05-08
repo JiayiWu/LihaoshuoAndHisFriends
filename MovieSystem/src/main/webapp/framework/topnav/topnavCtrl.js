@@ -73,27 +73,18 @@ define([], function () {
                 loginModal.result.then(function (data) {
 
                     var jsonData = {
-                        username: data.username,
-                        password: data.pwd,
-                        type: role
+                        password: data.pwd
                     };
 
-                    if (role === 0) {  // 普通用户
-                        // jsonData.type = 0;
-                    } else {  // 影院
-                        jsonData.nickname = data.nickname;
-                        jsonData.location = data.location;
-                        jsonData.telephone = data.telephone;
-                    }
-
                     if (type === 'login') {
+                        jsonData.userName = data.username;
                         $.ajax({
                             url: '/user/login',
-                            type: 'GET',
+                            type: 'POST',
                             data: jsonData,
                             success: function (resp) {
                                 sessionStorage.setItem('username', data.username);
-                                sessionStorage.setItem('user', resp);
+                                sessionStorage.setItem('user', JSON.stringify(resp.object));
                                 location.reload();
                             },
                             error: function (err) {
@@ -101,6 +92,17 @@ define([], function () {
                             }
                         });
                     } else {
+
+                        jsonData.username = data.username;
+                        jsonData.type = role;
+                        if (role === 0) {  // 普通用户
+                            // jsonData.type = 0;
+                        } else {  // 影院
+                            jsonData.nickname = data.nickname;
+                            jsonData.location = data.location;
+                            jsonData.telephone = data.telephone;
+                        }
+
                         $.ajax({
                             url: '/user/create',
                             type: 'POST',

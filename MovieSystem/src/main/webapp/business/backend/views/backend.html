@@ -6,7 +6,7 @@
 
     <div ng-if="auth()">
 
-        <div class="blockquote">{{auth().cinemaName}}</div>
+        <div class="blockquote">{{user.nickname}}</div>
         <div class="left_part">
             <div class="left_nav" ng-repeat="item in leftNavs"
                  ng-class="{'active': item.id==currentPage}"

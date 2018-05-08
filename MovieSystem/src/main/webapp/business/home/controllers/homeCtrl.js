@@ -28,6 +28,7 @@ define([''], function () {
             $scope.getDetail = function (item) {
                 $scope.currentPage = 'cinema';
                 $scope.selectedMovie = item;
+                $scope.dateClick($scope.selectedDate);
             };
 
             function getDateList() {
@@ -52,10 +53,11 @@ define([''], function () {
 
                 // 筛选影院
                 $.ajax({
-                    url: '/cinema/list',
+                    url: '/cinema/list/time',
                     type: 'GET',
                     data: {
-                        movieId: $scope.selectedMovie.id
+                        movieId: $scope.selectedMovie.id,
+                        time: $scope.selectedDate.ts
                     },
                     success: function (resp) {
                         $scope.cinemaList = resp.object;

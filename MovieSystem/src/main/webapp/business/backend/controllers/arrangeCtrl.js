@@ -27,7 +27,7 @@ define([''], function () {
             url: '/movie/list',
             type: 'GET',
             success: function (resp) {
-                $scope.movieOpts = resp;
+                $scope.movieOpts.options = resp.object;
             },
             error: function (err) {
                 console.log(err);
@@ -47,7 +47,7 @@ define([''], function () {
             url: '/cinema/room/list',
             type: 'GET',
             success: function (resp) {
-                $scope.roomOpts = resp;
+                $scope.roomOpts.options = resp.object;
             },
             error: function (err) {
                 console.log(err);

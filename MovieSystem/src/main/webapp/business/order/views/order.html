@@ -7,7 +7,7 @@
     <div ng-if="auth()">
 
         <div class="blockquote">订单记录</div>
-        <div class="not_login" ng-if="orderList.length==0">暂无数据</div>
+        <div class="not_login" ng-if="orderList.length==0||!orderList">暂无数据</div>
 
         <div ng-show="orderList.length>0">
             <table class="table table-striped">

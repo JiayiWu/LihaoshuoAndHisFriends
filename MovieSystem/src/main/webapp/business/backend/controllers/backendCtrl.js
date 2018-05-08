@@ -15,10 +15,10 @@ define([''], function () {
                 id: 'arrange',
                 label: '场次管理'
             }
-            // , {
-            //     id: 'movie',
-            //     label: '影片维护'
-            // }
+                // , {
+                //     id: 'movie',
+                //     label: '影片维护'
+                // }
             ];
 
             $scope.currentPage = 'room';
@@ -166,7 +166,8 @@ define([''], function () {
             };
 
             $scope.auth = function () {
-                return sessionStorage.getItem('user')
+                $scope.user = JSON.parse(sessionStorage.getItem('user'));
+                return sessionStorage.getItem('username');
             }
         }
     ];

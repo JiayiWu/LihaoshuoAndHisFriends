@@ -31,7 +31,7 @@ button.red {
     margin: 20px 0;
 }
 
-.active {
+ul.nav li a.active {
     color: #ef4238;
 }
 

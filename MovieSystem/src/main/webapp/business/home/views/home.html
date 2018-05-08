@@ -3,7 +3,7 @@
 <!-- 选择电影 -->
 <div ng-if="currentPage=='movie'" class="main_content">
     <div ng-repeat="item in movieList" class="each_movie" ng-click="getDetail(item)">
-        <img ng-src="item.logoUrl" alt="暂无图片资源">
+        <img ng-src="{{item.logoUrl}}" alt="暂无图片资源">
         <span>{{item.name}}</span>
     </div>
 </div>
@@ -12,12 +12,12 @@
 <div ng-if="currentPage=='cinema'||currentPage=='session'||currentPage=='seats'">
     <div class="cinema_bg_div">
         <div class="movie_thumbnail">
-            <img ng-src="selectedMovie.logoUrl" alt="暂无图片资源">
+            <img ng-src="{{selectedMovie.logoUrl}}" alt="暂无图片资源">
         </div>
 
         <div class="movie_info">
             <span class="title">{{selectedMovie.name}}</span>
-            <span>{{selectedMovie.type}} / {{selectedMovie.timeOfFile}}</span>
+            <span>{{selectedMovie.type}} / {{selectedMovie.timeOfMovie}} min</span>
             <span>{{selectedMovie.description}}</span>
         </div>
     </div>
