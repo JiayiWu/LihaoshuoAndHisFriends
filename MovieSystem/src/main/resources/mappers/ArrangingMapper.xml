@@ -23,7 +23,11 @@
     </update>
 
     <select id="getArrangingByMovieIdAndCinemaId"  resultType="Arranging">
-        SELECT * FROM arranging WHERE movieId = #{0} AND friendid = #{1}
+        SELECT * FROM arranging WHERE movieId = #{0} AND cinemaId = #{1}
+    </select>
+
+    <select id="getArrangingByCinemaId"  resultType="Arranging">
+        SELECT * FROM arranging WHERE cinemaId = #{0}
     </select>
 
     <delete id="deleteArranging">

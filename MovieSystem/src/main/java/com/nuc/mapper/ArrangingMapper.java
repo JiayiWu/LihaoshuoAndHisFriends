@@ -20,6 +20,8 @@ public interface ArrangingMapper {
     
     public List<Arranging> getArrangingByMovieIdAndCinemaId(int movieId, int cinemaId );
 
+    public List<Arranging> getArrangingByCinemaId(int cinemaId );
+
     public int deleteArranging(int id);
 
     public Arranging getArrangingById(int id);

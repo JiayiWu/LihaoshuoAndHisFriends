@@ -136,6 +136,17 @@ public class CinemaController {
   }
 
   /**
+   * 查找当前电影院下面指定电影的排片信息
+   *
+   * @return ArrangingVo
+   */
+  @RequestMapping("/arranging/cinema")
+  @ResponseBody
+  public MsgInfo listArranging(int cinemaId){
+    return cinemaService.listArranging(cinemaId);
+  }
+
+  /**
    * 查找指定厅信息
    *
    * @return RoomVo
