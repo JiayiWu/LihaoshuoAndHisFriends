@@ -128,22 +128,22 @@ public class CinemaController {
   /**
    * 查找当前电影院下面指定电影的排片信息
    *
-   * @return ArrangingVo
+   * @return ArrangingMovie
    */
   @RequestMapping("/arranging/list")
   @ResponseBody
-  public MsgInfo listArranging(@RequestParam int movieId, @RequestParam int cinemaId) {
+  public MsgInfo listArranging(@RequestParam int movieId, int cinemaId) {
     return cinemaService.listArranging(movieId,cinemaId);
   }
 
   /**
    * 查找当前电影院下面指定电影的排片信息
    *
-   * @return ArrangingVo
+   * @return ArrangingMovie
    */
   @RequestMapping("/arranging/cinema")
   @ResponseBody
-  public MsgInfo listArranging(@RequestParam int cinemaId){
+  public MsgInfo listArranging(int cinemaId){
     return cinemaService.listArranging(cinemaId);
   }
 
@@ -154,22 +154,19 @@ public class CinemaController {
    */
   @RequestMapping("/room/info")
   @ResponseBody
-  public MsgInfo roomInfo(@RequestParam  int roomId) {
+  public MsgInfo roomInfo(int roomId) {
     return cinemaService.getRoom(roomId);
   }
 
   /**
-   * 获取当前电影院下排了场次
+   * 获取当前电影院下排了哪些片
    *
-   * @return List<Arranging>
+   * @return List<Movie>
    */
   @RequestMapping("/movie/list")
   @ResponseBody
-  public MsgInfo getMovieList(HttpSession session) {
-      User user = (User) session.getAttribute("movie");
-      if (user == null)
-        return new MsgInfo(false,"未登录");
-    return cinemaService.getMovieList(user.getId());
+  public MsgInfo getMovieList(int cinemaId) {
+    return cinemaService.getMovieList(cinemaId);
   }
 
 }

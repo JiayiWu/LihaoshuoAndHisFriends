@@ -1,6 +1,7 @@
 package com.nuc.mapper;
 
 import com.nuc.model.Arranging;
+import com.nuc.model.ArrangingMovie;
 import com.nuc.model.Movie;
 import com.nuc.model.User;
 
@@ -18,9 +19,9 @@ public interface ArrangingMapper {
 
     public int updateArranging(Arranging arranging);
     
-    public List<Arranging> getArrangingByMovieIdAndCinemaId(int movieId, int cinemaId );
+    public List<ArrangingMovie> getArrangingByMovieIdAndCinemaId(int movieId, int cinemaId );
 
-    public List<Arranging> getArrangingByCinemaId(int cinemaId );
+    public List<ArrangingMovie> getArrangingByCinemaId(int cinemaId );
 
     public int deleteArranging(int id);
 

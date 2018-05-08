@@ -22,12 +22,15 @@
         where id=#{id}
     </update>
 
-    <select id="getArrangingByMovieIdAndCinemaId"  resultType="Arranging">
-        SELECT * FROM arranging WHERE movieId = #{0} AND cinemaId = #{1}
+    <select id="getArrangingByMovieIdAndCinemaId"  resultType="ArrangingMovie">
+  select a.id as id,a.cinemaId as cinemaId, a.movieId as movieId, a.roomId as roomId, a.startTime as startTime,a.endTime as endTime,a.price as price,a.status as status,m.name as movieName,r.name as roomName from
+      (SELECT * FROM arranging WHERE movieId = #{0} AND cinemaId = #{1})a,movie m,room r where a.movieId = m.id and a.roomId = r.id
+
     </select>
 
-    <select id="getArrangingByCinemaId"  resultType="Arranging">
-        SELECT * FROM arranging WHERE cinemaId = #{0}
+    <select id="getArrangingByCinemaId"  resultType="ArrangingMovie">
+      select a.id as id,a.cinemaId as cinemaId, a.movieId as movieId, a.roomId as roomId, a.startTime as startTime,a.endTime as endTime,a.price as price,a.status as status,m.name as movieName,r.name as roomName from
+      (SELECT * FROM arranging WHERE cinemaId = #{0})a,movie m,room r where a.movieId = m.id and a.roomId = r.id
     </select>
 
     <delete id="deleteArranging">

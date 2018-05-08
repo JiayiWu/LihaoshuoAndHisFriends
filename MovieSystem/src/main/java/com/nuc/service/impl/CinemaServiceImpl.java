@@ -153,7 +153,7 @@ public class CinemaServiceImpl implements CinemaService {
     @Override
     public MsgInfo listArranging(int cinemaId) {
         try {
-            return new MsgInfo(true,"获取成功",arrangingMapper.getListCinemaByMovieId(cinemaId));
+            return new MsgInfo(true,"获取成功",arrangingMapper.getArrangingByCinemaId(cinemaId));
         }catch (Exception e){
             return new MsgInfo(false,"获取失败");
         }
