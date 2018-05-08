@@ -5,6 +5,8 @@ import com.nuc.model.User;
 import com.nuc.service.CinemaService;
 import java.sql.Timestamp;
 import javax.servlet.http.HttpSession;
+
+import com.nuc.utils.SitConvertUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,13 +59,14 @@ public class CinemaController {
    */
   @RequestMapping("/room/create")
   @ResponseBody
-  public MsgInfo createRoom(HttpSession session, @RequestParam String name, @RequestParam int[][] sits,@RequestParam int modelNum) {
+  public MsgInfo createRoom(HttpSession session, @RequestParam String name, @RequestParam String sits,@RequestParam int modelNum) {
 
+    int[][] sit = SitConvertUtil.paraseJson(sits);
     User user = (User) session.getAttribute("cinema");
     if (null != user){
       return new MsgInfo(false,"用户未登录");
     }
-    return cinemaService.createRoom(user.getId(),name,sits,modelNum);
+    return cinemaService.createRoom(user.getId(),name,sit,modelNum);
   }
 
   /**
