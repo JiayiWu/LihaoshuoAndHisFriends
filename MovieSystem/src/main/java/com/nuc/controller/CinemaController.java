@@ -128,7 +128,7 @@ public class CinemaController {
   /**
    * 查找当前电影院下面指定电影的排片信息
    *
-   * @return ArrangingMovie
+   * @return List<ArrangingMovie>
    */
   @RequestMapping("/arranging/list")
   @ResponseBody
@@ -139,12 +139,16 @@ public class CinemaController {
   /**
    * 查找当前电影院下面指定电影的排片信息
    *
-   * @return ArrangingMovie
+   * @return List<ArrangingMovie>
    */
   @RequestMapping("/arranging/cinema")
   @ResponseBody
-  public MsgInfo listArranging(int cinemaId){
-    return cinemaService.listArranging(cinemaId);
+  public MsgInfo listArranging(HttpSession session){
+    User user = (User) session.getAttribute("movie");
+    if (user == null)
+      return new MsgInfo(false,"未登录");
+
+    return cinemaService.listArranging(user.getId());
   }
 
   /**
