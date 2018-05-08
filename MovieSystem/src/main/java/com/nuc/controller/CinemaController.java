@@ -97,7 +97,7 @@ public class CinemaController {
   @ResponseBody
   public MsgInfo listRoom(HttpSession session) {
     User user = (User) session.getAttribute("cinema");
-    if (null != user){
+    if (null == user){
       return new MsgInfo(false,"用户未登录");
     }
     return cinemaService.listRoom(user.getId());
