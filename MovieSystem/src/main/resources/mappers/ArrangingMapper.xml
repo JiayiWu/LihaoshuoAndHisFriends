@@ -52,7 +52,7 @@
 
 
     <select id="getAllMovieIdByCinemaId" resultType="Movie">
-       select * from  (SELECT a.movieId as movieid from arranging where cinemaId = #{0}) b,movie where movie.id = movieid;
+       select * from movie where id IN (SELECT DISTINCT movieId from arranging where cinemaId = #{0})
     </select>
 
 </mapper>
