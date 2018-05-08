@@ -13,7 +13,9 @@ import java.util.Calendar;
 public class TimeUtil {
 
     public static Timestamp increaTime(Timestamp time,int minutes){
-        return new Timestamp(time.getTime() + (minutes * 1000 * 60));
+        long timeL = time.getTime() + (minutes * 1000 * 60);
+        Timestamp timestamp = new Timestamp(timeL);
+        return timestamp;
     }
 
     public static String getNowTime(){

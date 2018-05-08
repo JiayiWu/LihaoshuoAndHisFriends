@@ -42,11 +42,11 @@
     </select>
 
     <select id="getListCinemaByMovieId" resultType="User">
-       select * from  (SELECT a.cinemaId as cinemaid from arranging where movieId = #{0}) b,user where user.id = cinemaid;
+      select * from user WHERE user.id IN (SELECT  cinemaid from arranging where movieId = #{0})
     </select>
 
     <select id="getListCinemaByMovieIdAndTime" resultType="User">
-       select * from  (SELECT a.cinemaId as cinemaid from arranging where movieId = #{0} and startTime >= #{1}) b,user where user.id = cinemaid;
+      select * from user WHERE user.id IN (SELECT  cinemaid from arranging where movieId = #{0} and startTime >= #{1})
     </select>
 
 
