@@ -90,7 +90,6 @@ define([], function () {
                         $.ajax({
                             url: '/user/login',
                             type: 'GET',
-                          contentType: "application/x-www-form-urlencoded; charset=utf-8",
                             data: jsonData,
                             success: function (resp) {
                                 sessionStorage.setItem('username', data.username);
