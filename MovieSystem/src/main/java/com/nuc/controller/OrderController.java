@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
@@ -31,7 +32,7 @@ public class OrderController {
      */
     @RequestMapping("/ticket")
     @ResponseBody
-    public MsgInfo orderTicket(HttpSession session,int roomId, int movieId,List<SitPair> sits){
+    public MsgInfo orderTicket(HttpSession session,@RequestParam int roomId, @RequestParam int movieId,@RequestParam List<SitPair> sits){
         User user =(User) session.getAttribute("user");
         if (null == user)
             return new MsgInfo(false,"用户未登录");
@@ -45,7 +46,7 @@ public class OrderController {
      */
     @RequestMapping("/pay")
     @ResponseBody
-    public MsgInfo payTicket(int orderId){
+    public MsgInfo payTicket(@RequestParam int orderId){
         return orderService.payTicket(orderId);
     }
 
@@ -67,7 +68,7 @@ public class OrderController {
      * @param orderId
      * @return Boolean true表示成功 false表示失败
      */
-    public MsgInfo deleteOrder(int orderId){
+    public MsgInfo deleteOrder(@RequestParam int orderId){
         return orderService.deleteOrder(orderId);
     }
 

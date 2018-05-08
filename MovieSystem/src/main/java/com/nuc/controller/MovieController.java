@@ -5,6 +5,7 @@ import com.nuc.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
@@ -33,7 +34,7 @@ public class MovieController {
      */
     @RequestMapping("/create")
     @ResponseBody
-    public MsgInfo createMovie(String name,String logoUrl,String description,String type,int timeOfFile){
+    public MsgInfo createMovie(@RequestParam String name,@RequestParam String logoUrl,@RequestParam String description,@RequestParam String type,@RequestParam int timeOfFile){
         return movieService.createMovie(name,logoUrl,description,type,timeOfFile);
     }
 
@@ -54,7 +55,7 @@ public class MovieController {
      */
     @RequestMapping("/delete")
     @ResponseBody
-    public MsgInfo deleteMovie(int id){
+    public MsgInfo deleteMovie(@RequestParam int id){
         return movieService.deleteMovie(id);
     }
 
@@ -65,7 +66,7 @@ public class MovieController {
      */
     @RequestMapping("/info")
     @ResponseBody
-    public MsgInfo getMovieInfo(int id){
+    public MsgInfo getMovieInfo(@RequestParam int id){
         return movieService.getMovieInfo(id);
     }
 

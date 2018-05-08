@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -24,7 +25,7 @@ public class UserController {
    */
   @RequestMapping("/create")
   @ResponseBody
-  public MsgInfo createUser(String username,String nickname,String location,String telephone,String password,int type) {
+  public MsgInfo createUser(@RequestParam String username,@RequestParam String nickname,@RequestParam String location,@RequestParam String telephone,@RequestParam String password,@RequestParam int type) {
     User user = new User(username,nickname,location,telephone,password,type);
     return userService.createUser(user);
   }
@@ -34,7 +35,7 @@ public class UserController {
    */
   @RequestMapping("/modify/info")
   @ResponseBody
-  public MsgInfo modifyInfo(int id,String username,String nickname,String location,String telephone,String password,int type) {
+  public MsgInfo modifyInfo(@RequestParam int id,@RequestParam String username,@RequestParam String nickname,@RequestParam String location,@RequestParam String telephone,@RequestParam String password,@RequestParam int type) {
     User user = new User(username,nickname,location,telephone,password,type);
     user.setId(id);
     return userService.modifyInfo(user);
@@ -42,7 +43,7 @@ public class UserController {
 
   @RequestMapping("/modify/password")
   @ResponseBody
-  public MsgInfo modifyPassword(HttpSession session, String oldPassword, String password) {
+  public MsgInfo modifyPassword(HttpSession session, @RequestParam String oldPassword, @RequestParam String password) {
     User user = (User) session.getAttribute("user");
     if (!user.getPassword().equals(oldPassword)) {
       return new MsgInfo(false, "原密码错误");
@@ -77,7 +78,7 @@ public class UserController {
    */
   @RequestMapping("/login")
   @ResponseBody
-  public MsgInfo login(HttpSession session, String userName, String password) {
+  public MsgInfo login(HttpSession session, @RequestParam String userName, @RequestParam String password) {
     MsgInfo msgInfo = userService.login(userName,password);
     if (msgInfo.getStatus()){
       changeSession(session,(User) msgInfo.getObject());

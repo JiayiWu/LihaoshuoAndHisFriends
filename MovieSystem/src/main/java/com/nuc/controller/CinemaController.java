@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -28,8 +29,8 @@ public class CinemaController {
    */
   @RequestMapping("/arrange/create")
   @ResponseBody
-  public MsgInfo arrangeMovie(HttpSession session, int roomId, int movieId, Timestamp startTime,
-      double price) {
+  public MsgInfo arrangeMovie(HttpSession session, @RequestParam int roomId, @RequestParam int movieId, @RequestParam Timestamp startTime,
+      @RequestParam double price) {
     User user = (User) session.getAttribute("cinema");
     if (null != user){
       return new MsgInfo(false,"用户未登录");
@@ -44,7 +45,7 @@ public class CinemaController {
    */
   @RequestMapping("/arrange/delete")
   @ResponseBody
-  public MsgInfo deleteArraging(int id) {
+  public MsgInfo deleteArraging(@RequestParam int id) {
     return cinemaService.deleteArraging(id);
   }
 
@@ -56,7 +57,7 @@ public class CinemaController {
    */
   @RequestMapping("/room/create")
   @ResponseBody
-  public MsgInfo createRoom(HttpSession session, String name, int[][] sits,int modelNum) {
+  public MsgInfo createRoom(HttpSession session, @RequestParam String name, @RequestParam int[][] sits,@RequestParam int modelNum) {
 
     User user = (User) session.getAttribute("cinema");
     if (null != user){
@@ -72,7 +73,7 @@ public class CinemaController {
    */
   @RequestMapping("/room/modify")
   @ResponseBody
-  public MsgInfo modifyRoom(int roomId, int[][] sits) {
+  public MsgInfo modifyRoom(@RequestParam int roomId, @RequestParam int[][] sits) {
     return cinemaService.modifyRoom(roomId,sits);
   }
 
@@ -83,7 +84,7 @@ public class CinemaController {
    */
   @RequestMapping("/room/delete")
   @ResponseBody
-  public MsgInfo deleteRoom(int roomId) {
+  public MsgInfo deleteRoom(@RequestParam int roomId) {
     return cinemaService.deleteRoom(roomId);
   }
 
@@ -109,7 +110,7 @@ public class CinemaController {
    */
   @RequestMapping("/list/time")
   @ResponseBody
-  public MsgInfo listCinema(int movieId,Timestamp time) {
+  public MsgInfo listCinema(@RequestParam int movieId,@RequestParam Timestamp time) {
     return cinemaService.listCinema(movieId,time);
   }
 
@@ -120,7 +121,7 @@ public class CinemaController {
    */
   @RequestMapping("/list")
   @ResponseBody
-  public MsgInfo listCinema(int movieId) {
+  public MsgInfo listCinema(@RequestParam int movieId) {
     return cinemaService.listCinema(movieId);
   }
 
@@ -131,7 +132,7 @@ public class CinemaController {
    */
   @RequestMapping("/arranging/list")
   @ResponseBody
-  public MsgInfo listArranging(int movieId, int cinemaId) {
+  public MsgInfo listArranging(@RequestParam int movieId, @RequestParam int cinemaId) {
     return cinemaService.listArranging(movieId,cinemaId);
   }
 
@@ -142,7 +143,7 @@ public class CinemaController {
    */
   @RequestMapping("/arranging/cinema")
   @ResponseBody
-  public MsgInfo listArranging(int cinemaId){
+  public MsgInfo listArranging(@RequestParam int cinemaId){
     return cinemaService.listArranging(cinemaId);
   }
 
@@ -153,7 +154,7 @@ public class CinemaController {
    */
   @RequestMapping("/room/info")
   @ResponseBody
-  public MsgInfo roomInfo(int roomId) {
+  public MsgInfo roomInfo(@RequestParam  int roomId) {
     return cinemaService.getRoom(roomId);
   }
 
@@ -164,7 +165,7 @@ public class CinemaController {
    */
   @RequestMapping("/movie/list")
   @ResponseBody
-  public MsgInfo getMovieList(int cinemaId) {
+  public MsgInfo getMovieList(@RequestParam int cinemaId) {
     return cinemaService.getMovieList(cinemaId);
   }
 

@@ -2,6 +2,7 @@ CREATE TABLE `user` (
   `id` INT unsigned NOT NULL AUTO_INCREMENT,
   `username` VARCHAR (255)  NOT NULL ,
   `nickname` VARCHAR (255)  ,
+  `location` VARCHAR (255)  ,
   `telephone` VARCHAR (255)  ,
   `password` VARCHAR (255)  NOT NULL,
   `type` INT ,
