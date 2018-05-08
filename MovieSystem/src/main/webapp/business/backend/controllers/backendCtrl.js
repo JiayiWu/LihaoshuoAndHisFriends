@@ -83,7 +83,7 @@ define([''], function () {
                     $.ajax({
                         url: '/cinema/room/create',
                         type: 'POST',
-                        data: JSON.stringify(data),
+                        data: data,
                         success: function (resp) {
                             $scope.roomList.push(resp.object);
                         },
@@ -112,6 +112,17 @@ define([''], function () {
             };
 
             /** arrange */
+            $.ajax({
+                url: '/cinema/movie/list',
+                type: 'GET',
+                success: function (resp) {
+                    $scope.arrangeList = resp.object;
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+
             $scope.addArrange = function () {
                 var arrangeModal = $uibModal.open({
                     animation: true,
@@ -121,13 +132,12 @@ define([''], function () {
                 });
 
                 arrangeModal.result.then(function (data) {
-
                     $.ajax({
                         url: '/cinema/arrange/create',
                         type: 'POST',
-                        data: JSON.stringify(data),
-                        success: function () {
-
+                        data: data,
+                        success: function (resp) {
+                            $scope.arrangeList.push(resp.object);
                         },
                         error: function (err) {
                             console.log(err);
@@ -137,6 +147,21 @@ define([''], function () {
                 });
             };
 
+            $scope.deleteArrange = function (item, index) {
+                $.ajax({
+                    url: '/cinema/arrange/delete',
+                    type: 'DELETE',
+                    data: {
+                        id: item.id
+                    },
+                    success: function () {
+                        $scope.arrangeList.splice(index, 1);
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                })
+            };
 
             $scope.auth = function () {
                 return sessionStorage.getItem('user')

@@ -155,7 +155,7 @@ define([''], function () {
                     $.ajax({
                         url: '/order/ticket',
                         type: 'POST',
-                        data: JSON.stringify(data),
+                        data: data,
                         success: function (resp) {
                             $state.go('order');
                         },

@@ -45,8 +45,14 @@
                     <th>操作</th>
                     </thead>
                     <tbody>
-                    <tr>
-
+                    <tr ng-repeat="item in arrangeList track by $index">
+                        <td>{{item.movieName}}</td>
+                        <td>{{item.roomName}}</td>
+                        <td>{{item.startTime}}</td>
+                        <td>{{item.price}}</td>
+                        <td>
+                            <a ng-click="deleteArrange(item, $index)">删除</a>
+                        </td>
                     </tr>
                     </tbody>
                 </table>

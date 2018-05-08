@@ -91,7 +91,7 @@ define([], function () {
                             url: '/user/login',
                             type: 'GET',
                           contentType: "application/x-www-form-urlencoded; charset=utf-8",
-                            data: JSON.stringify(jsonData),
+                            data: jsonData,
                             success: function (resp) {
                                 sessionStorage.setItem('username', data.username);
                                 sessionStorage.setItem('user', resp);
@@ -106,7 +106,7 @@ define([], function () {
                             url: '/user/create',
                             type: 'POST',
                             contentType: "application/x-www-form-urlencoded; charset=utf-8",
-                            data: JSON.stringify(jsonData),
+                            data: jsonData,
                             success: function (resp) {
                                 sessionStorage.setItem('username', data.username);
                                 sessionStorage.setItem('user', resp);
