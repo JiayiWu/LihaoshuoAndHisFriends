@@ -15,6 +15,8 @@ define(['lazy-load/lazyLoad'],
             scripts: {
                 controllers: [
                     'business/backend/controllers/backendCtrl',
+                    'business/backend/controllers/roomCtrl',
+                    'business/backend/controllers/arrangeCtrl'
                 ]
             }
         }];

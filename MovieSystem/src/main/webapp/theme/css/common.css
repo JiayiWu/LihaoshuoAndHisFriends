@@ -32,7 +32,7 @@ button.red {
 }
 
 .active {
-    color: #ef4238 !important;
+    color: #ef4238;
 }
 
 a {
@@ -43,4 +43,68 @@ a {
     font-size: 24px;
     color: #d8d8d8;
     margin: 20px 0;
+}
+
+.form_line {
+    width: 310px;
+    margin: 15px auto;
+}
+
+.form_line label {
+    display: inline-block;
+    vertical-align: middle;
+    width: 60px;
+}
+
+.form_line input {
+    width: 240px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* 下拉框 */
+.combox {
+    margin: 0 0;
+}
+
+.combox label {
+    position: relative;
+    top: 10px;
+}
+
+.combox button {
+    display: inline-block;
+    height: 35px;
+    width: 400px;
+    border: 1px solid #1591ee;
+    border-radius: 0;
+    outline: none;
+    padding-left: 5px;
+    float: none !important;
+    text-align: left;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+}
+
+.combox button .fa {
+    font-size: 18px;
+    float: right;
+    position: relative;
+    top: 3px;
+}
+
+.combox button:hover,
+.combox button:focus {
+    background-color: #fff !important;
+    border: 1px solid #1591ee !important;
+    -webkit-box-shadow: 0 0 8px rgba(25, 123, 192, 0.7);
+    -moz-box-shadow: 0 0 8px rgba(25, 123, 192, 0.7);
+    box-shadow: 0 0 8px rgba(25, 123, 192, 0.7);
+}
+
+.combox .dropdown-menu {
+    max-height: 200px;
+    overflow: auto;
 }

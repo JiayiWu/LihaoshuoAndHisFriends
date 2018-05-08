@@ -1,0 +1,57 @@
+<!-- Created by L.H.S on 2018/5/7. -->
+
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">增加影厅</h3>
+</div>
+
+<div class="modal-body" id="modal-body">
+
+    <div>
+        <label>影厅名称</label>
+        <input class="form-control" type="text">
+    </div>
+
+    <div style="margin-top: 20px;">
+        <label>座位模板</label>
+        <div>
+            <div class="each_template" ng-class="{'active':data.modelNum==1}"
+                 ng-click="selectTemplate(1)">
+                <img src="/theme/img/template-1.png">
+            </div>
+            <div class="each_template" ng-class="{'active':data.modelNum==2}"
+                 ng-click="selectTemplate(2)">
+                <img src="/theme/img/template-2.png">
+            </div>
+            <div class="each_template" ng-class="{'active':data.modelNum==3}"
+                 ng-click="selectTemplate(3)">
+                <img src="/theme/img/template-3.png">
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="ok()">完成</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+</div>
+
+<style>
+    .each_template {
+        width: 30%;
+        display: inline-block;
+        vertical-align: top;
+        margin: 0 1%;
+        cursor: pointer;
+    }
+
+    .each_template:hover,
+    .each_template.active {
+        border: 1px solid green;
+        box-shadow: 0 0 7px rgba(0, 128, 0, 0.3);
+    }
+
+    .each_template img {
+        width: 100%;
+    }
+</style>

@@ -5,8 +5,8 @@
 define([''], function () {
     'use strict';
 
-    var homeCtrl = ['$scope', '$uibModal',
-        function ($scope, $uibModal) {
+    var homeCtrl = ['$scope', '$uibModal', '$state',
+        function ($scope, $uibModal, $state) {
 
             // 页面标识位
             $scope.currentPage = 'movie';
@@ -17,7 +17,7 @@ define([''], function () {
                 url: '/movie/list',
                 type: 'GET',
                 success: function (resp) {
-                    $scope.movieList = resp;
+                    $scope.movieList = resp.object;
                 },
                 error: function (err) {
                     console.log(err)
@@ -57,8 +57,8 @@ define([''], function () {
                     data: {
                         movieId: $scope.selectedMovie.id
                     },
-                    success:function (resp) {
-                        $scope.cinemaList = resp
+                    success: function (resp) {
+                        $scope.cinemaList = resp.object;
                     },
                     error: function (err) {
                         console.log(err);
@@ -79,8 +79,8 @@ define([''], function () {
                         movieId: $scope.selectedMovie.id,
                         cinemaId: item.id
                     },
-                    success:function (resp) {
-                        $scope.arrangeList = resp
+                    success: function (resp) {
+                        $scope.arrangeList = resp.object;
                     },
                     error: function (err) {
                         console.log(err);
@@ -96,16 +96,29 @@ define([''], function () {
                 $scope.currentPage = 'seats';
 
                 // 获取seats
+                $.ajax({
+                    url: '/cinema/room/info',
+                    type: 'GET',
+                    data: {
+                        roomId: item.roomId
+                    },
+                    success: function (resp) {
+                        $scope.seatsArr = resp.object.sits;
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
             };
 
             //0无人，1预定，2过道，3装修, 4已选
-            $scope.seatsArr = [
-                [0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 2, 1, 1, 0, 0, 0, 0],
-                [0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0]
-            ];
+            // $scope.seatsArr = [
+            //     [0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
+            //     [0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
+            //     [0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
+            //     [0, 0, 0, 0, 2, 1, 1, 0, 0, 0, 0],
+            //     [0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0]
+            // ];
 
             $scope.seatClick = function (item, row, index) {
                 if (item === 0) {
@@ -124,6 +137,32 @@ define([''], function () {
                 });
 
                 payModal.result.then(function () {
+
+                    var data = {
+                        roomId: $scope.selectedSession.roomId,
+                        movieId: $scope.selectedMovie.id,
+                        sits: []
+                    };
+
+                    $scope.seatsArr.forEach(function (row, rowIdx) {
+                        row.forEach(function (item, colIdx) {
+                            if (item === 4) {
+                                data.sits.push([rowIdx, colIdx]);
+                            }
+                        });
+                    });
+
+                    $.ajax({
+                        url: '/order/ticket',
+                        type: 'POST',
+                        data: JSON.stringify(data),
+                        success: function (resp) {
+                            $state.go('order');
+                        },
+                        error: function (err) {
+                            console.log(err);
+                        }
+                    });
 
                 });
             }

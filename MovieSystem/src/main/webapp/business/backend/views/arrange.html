@@ -1,0 +1,52 @@
+<!-- Created by L.H.S on 2018/5/7. -->
+
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">增加场次</h3>
+</div>
+
+<div class="modal-body" id="modal-body">
+
+    <div class="form_line">
+        <label>选择电影</label>
+        <div uib-dropdown class="inner_combox">
+            <button id="btn-append-to-body" type="button" class="btn btn-default" uib-dropdown-toggle>
+                {{movieOpts.selectedObj.name}} <span class="fa fa-caret-down"></span>
+            </button>
+            <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="btn-append-to-body">
+                <li ng-repeat="op in movieOpts.options" ng-click="movieOpts.select(op)">
+                    <a>{{op.name}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="form_line">
+        <label>选择影厅</label>
+        <div uib-dropdown class="inner_combox">
+            <button type="button" class="btn btn-default" uib-dropdown-toggle>
+                {{roomOpts.selectedObj.name}} <span class="fa fa-caret-down"></span>
+            </button>
+            <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="btn-append-to-body">
+                <li ng-repeat="op in roomOpts.options" ng-click="movieOpts.select(op)">
+                    <a>{{op.name}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="form_line">
+        <label>开始时间</label>
+        <input class="form-control" type="text" ng-model="data.startTime">
+    </div>
+
+    <div class="form_line">
+        <label>票价</label>
+        <input class="form-control" type="text" ng-model="data.price">
+    </div>
+
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="ok()">完成</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+</div>

@@ -21,11 +21,36 @@
     <div class="right_part">
         <!-- room -->
         <div ng-if="currentPage=='room'">
-
+            <div class="each_room create_btn" ng-click="addRoom()">
+                + 增加影厅
+            </div>
+            <div class="each_room" ng-repeat="item in roomList track by $index">
+                <div class="delete_btn" ng-click="deleteRoom(item, $index)">X</div>
+                <img ng-src="{{'/theme/img/template-'+item.modelNum+'.png'}}">
+                <span>{{item.name}}</span>
+            </div>
         </div>
 
         <!-- arrange -->
         <div ng-if="currentPage=='arrange'">
+
+            <button class="red" ng-click="addArrange()">增加场次</button>
+            <div>
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <th>电影</th>
+                    <th>影厅</th>
+                    <th>开始时间</th>
+                    <th>价格</th>
+                    <th>操作</th>
+                    </thead>
+                    <tbody>
+                    <tr>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
 
         </div>
 
@@ -65,5 +90,50 @@
     .left_nav.active {
         background-color: #dafafc;
         color: #4f4f4f !important;
+    }
+
+    .each_room {
+        width: 180px;
+        height: 130px;
+        position: relative;
+        display: inline-block;
+        vertical-align: top;
+        margin: 10px 10px;
+        border: 1px solid #d8d8d8;
+    }
+
+    .each_room img {
+        width: 178px;
+        height: 110px;
+    }
+
+    .each_room span {
+        position: absolute;
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+        bottom: 0;
+        left: 0;
+        line-height: 20px;
+    }
+
+    .each_room.create_btn {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .each_room .delete_btn {
+        color: red;
+        position: absolute;
+        right: 10px;
+        top: 5px;
+        display: none;
+        cursor: pointer;
+    }
+
+    .each_room:hover > .delete_btn {
+        display: block;
     }
 </style>

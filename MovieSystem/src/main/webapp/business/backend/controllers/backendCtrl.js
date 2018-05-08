@@ -5,8 +5,8 @@
 define([''], function () {
     'use strict';
 
-    var backendCtrl = ['$scope',
-        function ($scope) {
+    var backendCtrl = ['$scope', '$uibModal',
+        function ($scope, $uibModal) {
 
             $scope.leftNavs = [{
                 id: 'room',
@@ -24,6 +24,119 @@ define([''], function () {
             $scope.changePage = function (item) {
                 $scope.currentPage = item.id;
             };
+
+            var template_1 = [
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            ];
+
+            var template_2 = [
+                [0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0]
+            ];
+
+            var template_3 = [
+                [0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0]
+            ];
+
+            // $scope.roomList = [];
+
+            $.ajax({
+                url: '/cinema/room/list',
+                type: 'GET',
+                success: function (resp) {
+                    $scope.roomList = resp.object;
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+
+            $scope.addRoom = function () {
+                var roomModal = $uibModal.open({
+                    animation: true,
+                    backdrop: 'static',
+                    templateUrl: 'business/backend/views/room.html',
+                    controller: 'roomCtrl'
+                });
+
+                roomModal.result.then(function (data) {
+
+                    if (data.modelNum == 1) {
+                        data.seats = template_1;
+                    } else if (data.modelNum == 2) {
+                        data.seats = template_2;
+                    } else {
+                        data.seats = template_3;
+                    }
+
+                    $.ajax({
+                        url: '/cinema/room/create',
+                        type: 'POST',
+                        data: JSON.stringify(data),
+                        success: function (resp) {
+                            $scope.roomList.push(resp.object);
+                        },
+                        error: function (err) {
+                            console.log(err);
+                        }
+                    })
+
+                });
+            };
+
+            $scope.deleteRoom = function (item, index) {
+                $.ajax({
+                    url: '/cinema/room/delete',
+                    type: 'DELETE',
+                    data: {
+                        roomId: item.id
+                    },
+                    success: function () {
+                        $scope.roomList.splice(index, 1);
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                })
+            };
+
+            /** arrange */
+            $scope.addArrange = function () {
+                var arrangeModal = $uibModal.open({
+                    animation: true,
+                    backdrop: 'static',
+                    templateUrl: 'business/backend/views/arrange.html',
+                    controller: 'arrangeCtrl'
+                });
+
+                arrangeModal.result.then(function (data) {
+
+                    $.ajax({
+                        url: '/cinema/arrange/create',
+                        type: 'POST',
+                        data: JSON.stringify(data),
+                        success: function () {
+
+                        },
+                        error: function (err) {
+                            console.log(err);
+                        }
+                    })
+
+                });
+            };
+
 
             $scope.auth = function () {
                 return sessionStorage.getItem('user')
