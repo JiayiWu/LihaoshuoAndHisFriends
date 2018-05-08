@@ -169,8 +169,11 @@ public class CinemaController {
    */
   @RequestMapping("/movie/list")
   @ResponseBody
-  public MsgInfo getMovieList(int cinemaId) {
-    return cinemaService.getMovieList(cinemaId);
+  public MsgInfo getMovieList(HttpSession session) {
+    User user = (User) session.getAttribute("movie");
+    if (user == null)
+      return new MsgInfo(false,"未登录");
+    return cinemaService.getMovieList(user.getId());
   }
 
 }
