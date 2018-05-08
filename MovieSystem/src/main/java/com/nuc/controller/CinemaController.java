@@ -63,7 +63,7 @@ public class CinemaController {
 
     int[][] sit = SitConvertUtil.paraseJson(sits);
     User user = (User) session.getAttribute("cinema");
-    if (null != user){
+    if (null == user){
       return new MsgInfo(false,"用户未登录");
     }
     return cinemaService.createRoom(user.getId(),name,sit,modelNum);
