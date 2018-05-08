@@ -29,11 +29,12 @@ public class OrderServiceImpl implements OrderService {
 
 
     @Override
+    @Transactional
     public MsgInfo orderTicket(int userId,int roomId, int movieId,List<SitPair> sits) {
         Room room = roomMapper.getRoomById(roomId);
         Order order = new Order(TicketNumGenerator.generatorTicketNum(room.getCinemaId()),userId,room.getCinemaId(),movieId,roomId,SitConvertUtil.toJsonPair(sits));
         if (orderMapper.insertOrder(order) > 0){
-            return new MsgInfo(true,"订单预定成功",order);
+            return payTicket(order.getId());
         }else {
             return new MsgInfo(false,"订单预定失败");
         }
