@@ -5,12 +5,12 @@
 <mapper namespace="com.nuc.mapper.RoomMapper">
     <!-- 这里namespace必须是UserMapper接口的路径” -->
     <insert id="insertRoom" parameterType="Room" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO user(cinemaId,name,sits,status,modelNum)
+        INSERT INTO room(cinemaId,name,sits,status,modelNum)
         VALUES (#{cinemaId},#{name},#{sits},#{status},#{modelNum})
     </insert>
 
     <update id="updateRoom" parameterType="Room">
-        UPDATE user SET
+        UPDATE room SET
         <set>
             <if test="cinemaId != null">cinemaId=#{cinemaId},</if>
             <if test="name != null">name=#{name},</if>
