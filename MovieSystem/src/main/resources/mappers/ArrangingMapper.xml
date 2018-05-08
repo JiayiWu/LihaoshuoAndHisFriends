@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.vid.mapper.ArrangingMapper">
+<mapper namespace="com.nuc.mapper.ArrangingMapper">
     <!-- 这里namespace必须是UserMapper接口的路径” -->
     <insert id="insertArranging"  parameterType="Arranging" useGeneratedKeys="true" keyProperty="id">
       INSERT INTO arranging (cinemaId,movieId,roomId,startTime,endTime,price,status) VALUES (#{cinemaId},#{movieId},#{roomId},#{startTime},#{endTime},#{price},#{status})
