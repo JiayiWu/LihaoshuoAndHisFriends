@@ -35,7 +35,7 @@ public class CinemaController {
       @RequestParam double price) {
 
     User user = (User) session.getAttribute("cinema");
-    if (null != user){
+    if (null == user){
       return new MsgInfo(false,"用户未登录");
     }
     return cinemaService.arrangeMovie(user.getId(), roomId, movieId, convert(startTime), price);
