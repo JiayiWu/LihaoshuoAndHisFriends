@@ -167,19 +167,18 @@ define([''], function () {
 
                     data.sits = JSON.stringify(data.sits);
 
-                    $state.go('order');
-                    // $.ajax({
-                    //     url: '/order/ticket',
-                    //     type: 'POST',
-                    //     data: data,
-                    //     success: function (resp) {
-                    //         $state.go('order');
-                    //     },
-                    //     error: function (err) {
-                    //         $state.go('order');
-                    //         console.log(err);
-                    //     }
-                    // });
+                    // $state.go('order');
+                    $.ajax({
+                        url: '/order/ticket',
+                        type: 'POST',
+                        data: data,
+                        success: function (resp) {
+                            $state.go('order');
+                        },
+                        error: function (err) {
+                            console.log(err);
+                        }
+                    });
 
                 });
             }
