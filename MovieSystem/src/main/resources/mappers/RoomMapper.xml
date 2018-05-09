@@ -10,7 +10,7 @@
     </insert>
 
     <update id="updateRoom" parameterType="Room">
-        UPDATE room SET
+        UPDATE room
         <set>
             <if test="cinemaId != null">cinemaId=#{cinemaId},</if>
             <if test="name != null">name=#{name},</if>

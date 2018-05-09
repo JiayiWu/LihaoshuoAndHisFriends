@@ -29,19 +29,22 @@ public class OrderServiceImpl implements OrderService {
 
 
     @Override
-//    @Transactional
+    @Transactional
     public MsgInfo orderTicket(int userId,int roomId, int movieId,List<SitPair> sits) {
         Room room = roomMapper.getRoomById(roomId);
         Order order = new Order(TicketNumGenerator.generatorTicketNum(room.getCinemaId()),userId,room.getCinemaId(),movieId,roomId,SitConvertUtil.toJsonPair(sits));
         if (orderMapper.insertOrder(order) > 0){
-            return payTicket(order.getId());
+
+                return payTicket(order.getId());
+
+
         }else {
             return new MsgInfo(false,"订单预定失败");
         }
     }
 
     @Override
-    @Transactional
+
     public MsgInfo payTicket(int orderId) {
         Order order = orderMapper.getOrderById(orderId);
         Room room = roomMapper.getRoomById(order.getRoomId());
@@ -49,11 +52,11 @@ public class OrderServiceImpl implements OrderService {
         int[][]sits = SitConvertUtil.paraseJson(room.getSits());
         List<SitPair> ticketSit = SitConvertUtil.parasePair(order.getSitPair());
         for (SitPair sitPair : ticketSit){
-            if (sits[sitPair.getRow()][sitPair.getColumn()] != 0){
+            if (sits[sitPair.getColumn()][sitPair.getRow()] != 0){
                 isConflict = true;
                 break;
             }else {
-                sits[sitPair.getRow()][sitPair.getColumn()] = 1;
+                sits[sitPair.getColumn()][sitPair.getRow()] = 1;
             }
         }
         if (!isConflict){
@@ -63,7 +66,8 @@ public class OrderServiceImpl implements OrderService {
             roomMapper.updateRoom(room);
             return new MsgInfo(true,"订单支付成功",order);
         }else {
-            return new MsgInfo(false,"购买失败，座位不可用");
+            //事务回滚
+            throw new RuntimeException();
         }
 
     }

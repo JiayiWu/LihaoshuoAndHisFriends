@@ -28,12 +28,8 @@ public class SitConvertUtil {
     }
 
     public static List<SitPair> parasePair(String json){
-        JSONArray h =JSONObject.parseArray(json);
-        List<SitPair> results = new ArrayList<>();
-        for (Object j : h){
-            results.add((SitPair)j);
-        }
-        return results;
+        List<SitPair> list =JSONObject.parseArray(json,SitPair.class);
+        return list;
     }
 
     public static String toJson(int[][]sits){

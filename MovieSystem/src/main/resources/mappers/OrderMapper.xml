@@ -32,8 +32,11 @@
         DELETE  FROM orders WHERE id = #{0}
     </delete>
 
-    <select id="getOrdersByUserid"  resultType="Order">
-     select * from orders WHERE userId = #{0} order by gmt_create DESC
+    <select id="getOrdersByUserid"  resultType="OrderVo">
+     select o.id as id,o.ticketNum as ticketNum,o.gmt_create as gmt_create, o.modify_create  as modify_create,
+     o.userId as userId,o.cinemaId as cinemaId,u.nickname as cinemaName,u.location as cinemaLocation,
+     o.movieId as movieId,m.name as movieName,o.roomId as roomId,r.name as roomName,o.status as status
+     from orders o ,room r,movie m ,user u WHERE userId = #{0} and o.roomId = r.id and o.movieId = m.id and u.id = o.cinemaId order by o.gmt_create DESC
     </select>
 
 </mapper>

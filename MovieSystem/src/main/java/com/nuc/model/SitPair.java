@@ -5,6 +5,9 @@ public class SitPair {
     int column;
     int row;
 
+    public SitPair() {
+    }
+
     public SitPair(int column, int row) {
         this.column = column;
         this.row = row;
