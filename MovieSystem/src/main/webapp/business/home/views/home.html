@@ -82,7 +82,6 @@
                 <span style="margin-left: 20px;font-size: 14px;">观影时间：{{selectedCinema.label}} {{selectedSession.startTime + ' - ' + selectedSession.endTime}}</span>
                 <span style="margin-left: 20px;font-size: 14px;">影厅：{{selectedSession.roomId}}</span>
                 <span style="margin-left: 20px;font-size: 14px;">票价：￥{{selectedSession.price}}/张</span>
-                <button class="red confirm_seat" ng-click="pay()">确认选座</button>
             </div>
 
             <div class="main_content" style="width: 1100px; padding: 20px 20px; border: 1px solid #d8d8d8; margin-top: 20px;">
@@ -96,6 +95,9 @@
                     <div class="title_tip">
                         <img src="/theme/img/selected.png"> 已选座位
                     </div>
+
+                    <button class="red confirm_seat" ng-click="pay()">确认选座</button>
+
                 </div>
 
                 <!-- 银幕中央 -->

@@ -115,9 +115,12 @@ define([''], function () {
 
             /** arrange */
             $.ajax({
-                url: '/cinema/movie/list',
+                url: '/cinema/arranging/cinema',
                 type: 'GET',
                 success: function (resp) {
+                    resp.object.forEach(function (item) {
+                        item.time = new Date(item.startTime);
+                    });
                     $scope.arrangeList = resp.object;
                 },
                 error: function (err) {
@@ -133,12 +136,14 @@ define([''], function () {
                     controller: 'arrangeCtrl'
                 });
 
-                arrangeModal.result.then(function (data) {
+                arrangeModal.result.then(function (data, movieName, roomName) {
                     $.ajax({
                         url: '/cinema/arrange/create',
                         type: 'POST',
                         data: data,
                         success: function (resp) {
+                            resp.object.movieName = movieName;
+                            resp.object.roomName = roomName;
                             $scope.arrangeList.push(resp.object);
                         },
                         error: function (err) {

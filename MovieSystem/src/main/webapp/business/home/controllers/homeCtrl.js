@@ -5,8 +5,8 @@
 define([''], function () {
     'use strict';
 
-    var homeCtrl = ['$scope', '$uibModal', '$state',
-        function ($scope, $uibModal, $state) {
+    var homeCtrl = ['$scope', '$uibModal', '$state', '$timeout',
+        function ($scope, $uibModal, $state, $timeout) {
 
             // 页面标识位
             $scope.currentPage = 'movie';
@@ -60,7 +60,9 @@ define([''], function () {
                         time: $scope.selectedDate.ts
                     },
                     success: function (resp) {
-                        $scope.cinemaList = resp.object;
+                        $timeout(function () {
+                            $scope.cinemaList = resp.object;
+                        })
                     },
                     error: function (err) {
                         console.log(err);
@@ -82,7 +84,14 @@ define([''], function () {
                         cinemaId: item.id
                     },
                     success: function (resp) {
-                        $scope.arrangeList = resp.object;
+                        $timeout(function () {
+                            resp.object.forEach(function (item) {
+                                item.startTime = new Date(item.startTime);
+                                item.endTime = new Date(item.endTime);
+                            })
+
+                            $scope.arrangeList = resp.object;
+                        })
                     },
                     error: function (err) {
                         console.log(err);
@@ -105,7 +114,9 @@ define([''], function () {
                         roomId: item.roomId
                     },
                     success: function (resp) {
-                        $scope.seatsArr = resp.object.sits;
+                        $timeout(function () {
+                            $scope.seatsArr = resp.object.sits;
+                        })
                     },
                     error: function (err) {
                         console.log(err);
@@ -154,17 +165,21 @@ define([''], function () {
                         });
                     });
 
-                    $.ajax({
-                        url: '/order/ticket',
-                        type: 'POST',
-                        data: data,
-                        success: function (resp) {
-                            $state.go('order');
-                        },
-                        error: function (err) {
-                            console.log(err);
-                        }
-                    });
+                    data.sits = JSON.stringify(data.sits);
+
+                    $state.go('order');
+                    // $.ajax({
+                    //     url: '/order/ticket',
+                    //     type: 'POST',
+                    //     data: data,
+                    //     success: function (resp) {
+                    //         $state.go('order');
+                    //     },
+                    //     error: function (err) {
+                    //         $state.go('order');
+                    //         console.log(err);
+                    //     }
+                    // });
 
                 });
             }

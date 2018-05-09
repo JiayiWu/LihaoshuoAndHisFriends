@@ -2,22 +2,27 @@ package com.nuc.model;
 
 public class SitPair {
 
-  int column;
-  int row;
+    int column;
+    int row;
 
-  public int getColumn() {
-    return column;
-  }
+    public SitPair(int column, int row) {
+        this.column = column;
+        this.row = row;
+    }
 
-  public void setColumn(int column) {
-    this.column = column;
-  }
+    public int getColumn() {
+        return column;
+    }
 
-  public int getRow() {
-    return row;
-  }
+    public void setColumn(int column) {
+        this.column = column;
+    }
 
-  public void setRow(int row) {
-    this.row = row;
-  }
+    public int getRow() {
+        return row;
+    }
+
+    public void setRow(int row) {
+        this.row = row;
+    }
 }

@@ -57,7 +57,7 @@ define([''], function () {
         $scope.ok = function () {
             var data = angular.copy($scope.data);
             data.startTime = new Date(data.startTime).getTime();
-            $uibModalInstance.close(data);
+            $uibModalInstance.close(data, $scope.movieOpts.selectedObj.name, $scope.roomOpts.selectedObj.name);
         };
 
         $scope.cancel = function () {

@@ -5,11 +5,11 @@
 <mapper namespace="com.nuc.mapper.OrderMapper">
     <!-- 这里namespace必须是UserMapper接口的路径” -->
     <insert id="insertOrder"  parameterType="Order" useGeneratedKeys="true" keyProperty="id">
-      INSERT INTO order (ticketNum,gmt_create,modify_create,userId,cinemaId,movieId,roomId,status,sitPair) VALUES (#{ticketNum},#{gmt_create},#{modify_create},#{userId},#{cinemaId},#{movieId},#{roomId},#{roomId},#{status},#{sitPair})
+      INSERT INTO orders (ticketNum,gmt_create,modify_create,userId,cinemaId,movieId,roomId,status,sitPair) VALUES (#{ticketNum},#{gmt_create},#{modify_create},#{userId},#{cinemaId},#{movieId},#{roomId},#{status},#{sitPair})
     </insert>
 
     <update id="updateOrder"   parameterType="Order">
-        update order
+        update orders
         <set>
             <if test="ticketNum != null">ticketNum=#{ticketNum},</if>
             <if test="gmt_create != null">gmt_create=#{gmt_create},</if>
@@ -25,15 +25,15 @@
     </update>
 
     <select id="getOrderById"  resultType="Order">
-        SELECT * FROM order WHERE id = #{0}
+        SELECT * FROM orders WHERE id = #{0}
     </select>
 
     <delete id="deleteOrder">
-        DELETE  FROM order WHERE id = #{0}
+        DELETE  FROM orders WHERE id = #{0}
     </delete>
 
     <select id="getOrdersByUserid"  resultType="Order">
-     select * from order WHERE userId = #{0} order by gmt_create DESC
+     select * from orders WHERE userId = #{0} order by gmt_create DESC
     </select>
 
 </mapper>

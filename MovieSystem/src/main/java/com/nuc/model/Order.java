@@ -37,9 +37,7 @@ public class Order {
         int cinemaId, int movieId, int roomId, String sitPair) {
         this.ticketNum = ticketNum;
         this.gmt_create = new Timestamp(new Date().getTime());
-        ;
         this.modify_create = new Timestamp(new Date().getTime());
-        ;
         this.userId = userId;
         this.cinemaId = cinemaId;
         this.movieId = movieId;
